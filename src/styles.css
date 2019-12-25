@@ -1,1 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
+em{ margin-left: 50px; color: #E05C65;}
+ 			.error input{ background-color: #E3C3C5}
+ 			.error ::-webkit-input-placeholder { color:#999;}
+ 			.error ::-moz-placeholder { color: #999; }
+ 			.error :-moc-placeholder { color: #999; }
+			.error :ms-input-placeholder { color: #999;}

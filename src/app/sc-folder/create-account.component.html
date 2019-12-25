@@ -1,0 +1,65 @@
+<div class="form-group">
+    <button type="button" class="btn btn-fb">FB Sign up</button>
+    <button type="button" class="btn btn-gg">GG Sign up</button>
+</div>
+<form [formGroup]="loginForm" (ngSubmit)="saveUser(loginForm.value)">
+
+    <div class="form-group">
+    <label for="preference">I'm a:</label>
+    <em *ngIf="loginForm.controls.gender?.invalid && loginForm.controls.gender?.touched">Required</em>
+    <br/>
+    <select class="form-control" formControlName = "gender" class="preference" required> 
+        <option value="" selected>Gender and preference</option>
+        <option value="male">Man, interested in Women</option>
+        <option value="female">Woman,interested in Men</option>
+    </select>
+    </div>
+
+    <div class="form-group">
+        <label for="">Birthday:</label>
+        <em *ngIf="loginForm.controls.birthday.invalid && loginForm.controls.birthday?.touched">Required</em>
+        <br/>
+        <div formGroupName="birthday" class="flex-container">
+            <div [ngClass]="{'error': (loginForm.controls.day?.invalid && loginForm.controls.day?.touched)}"> 
+                <input type="number" maxLength="2" class="form-control" formControlName = "day" placeholder="dd" id="day" required />
+            </div>
+            <div [ngClass]="{'error': (loginForm.controls.month?.invalid && loginForm.controls.month?.touched)}"> 
+                <input type="number" class="form-control" formControlName="month" placeholder="mm" id="month" required />
+            </div>
+            <div [ngClass]="{'error': (loginForm.controls.year?.invalid && loginForm.controls.year?.touched)}"> 
+                <input type="number" class="form-control" formControlName="year" placeholder="yyyy" id="year" required />
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group" [ngClass]="{'error': (loginForm.controls.email.invalid && loginForm.controls.email?.touched)}">
+        <label for="email">Email Address</label>
+        <em *ngIf="loginForm.controls.email?.invalid && loginForm.controls.email?.touched">Required</em>
+        <br/>
+        <input name="email" type="text" formControlName="email" placeholder="john@example.com" id="email" required />
+    </div>
+
+    <div class="form-group" [ngClass]="{'error': (loginForm.controls.username?.invalid && loginForm.controls.username?.touched)}">
+        <label for="username">Username</label>
+        <em *ngIf="loginForm.controls.username?.invalid && loginForm.controls.username?.touched">Required</em>
+        <br/>
+        <input name="username" type="text" formControlName="username" placeholder="Username" id="username" required />
+    </div>
+
+
+    <div class="form-group" [ngClass]="{'error': (loginForm.controls.password?.invalid && loginForm.controls.password?.touched)}">
+        <label for="password">Password</label>
+        <em *ngIf="loginForm.controls.password?.invalid && loginForm.controls.password?.touched">Cannot be less than eight characters</em>
+        <br/>
+        <input name="password" type="password" formControlName="password" placeholder="password" id="password" required />
+    </div>
+
+    <div class="form-group" [ngClass]="{'error': (loginForm.controls.confirmPassword?.invalid && loginForm.controls.confirmPassword?.touched)}">
+        <label for="confirmPassword">Confirm password</label>
+        <em *ngIf="loginForm.controls.confirmPassword?.invalid && loginForm.controls.confirmPassword?.touched">Must be the same as "Password"</em>
+        <br/>
+        <input name="confirmPassword" type="password" formControlName="confirmPassword" placeholder="confirm password" id="cpassword" required />
+    </div>    
+
+    <button type="submit" class="btn btn-submit">Sign Up</button>
+</form>

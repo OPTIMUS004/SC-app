@@ -1,0 +1,59 @@
+<div class="flex-container bg-white mt-4">
+    <right-panel class="right-panel" [user]="user">
+    </right-panel>
+    <div class="col-sm-8 holder">
+        <div class="container head-line">
+            <div class="row left">    
+                <button class="mr-3 btn btn-success" (click)="usePreferenceToFilter()" >Use Preference</button>
+            </div>
+            <div class="row right ">
+                <form id = "searchForm" (ngSubmit) = "searchSession(searchTerm)" class="form-inline">
+                    <div class="form-group">
+                        <input class="form-control" name="searchTerm" [(ngModel)]="searchTerm" type="text" placeholder="Search Username..." />
+                        <button class="btn btn-primary" type="submit" modal-trigger="searchBlock">Search</button> 
+                    </div>
+                </form>
+                <simple-modal elementId="searchBlock" class="modalContainer">
+                    <h6>MATCHING RESULT</h6>
+                    <div class="container" *ngFor = "let found of foundSearch">
+                        <div class="text-cyan" [routerLink]="['/soul-connect/users',found?.username]" data-dismiss="modal" >{{found?.username}}</div>
+                        <span *ngIf="foundSearch.length == 1">No such title here</span>
+                    </div>
+                </simple-modal>
+            </div>
+        </div>
+        <div class="" *ngFor="let user of filterUsers">
+            <div class="row content-two" [@fadeInOut]>
+                    <div class="card shadow">
+                        <div class="user-info">
+                            <img src="/assets/images/profile1.png" alt="img" class="col-md-6 logo shadow">
+                            <div class="user-sig col-md-6">
+                                <span class="username"><strong>{{user?.username | uppercase}}</strong></span><br/>
+                                <span class="title">Occupation: {{user.workStatus?.occupation}}</span><br/>
+                                <span>Age: {{user?.age}}</span><br/>
+                                <span>{{user?.rStatus}}</span><br/>
+                            </div>
+                        </div>
+                        <div class="bg-dark text-center">
+                            <span class="text-light" [routerLink] = "['/soul-connect/users',user?.username]"><a>More Details</a></span>
+                            <favorite (like)="toggleFavorite(user)" [liked]="userHasLiked(user)"></favorite>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+    <div class ="col-sm-2 content-three">
+        <div class="fancy">
+            <h5>Your Fancies</h5>
+            <likes [@fadeInOut]></likes>
+        </div>
+
+        <div>Contact your Chaperone
+            <form (ngSubmit)="msgChap()">
+                <input type="text" name="name" />
+                <button type="submit" class="btn default">Share Fancy with Chaperone</button>
+            </form>
+        </div>
+    </div>
+</div>
+<unauthorized *ngIf="!auth.isAuthenticated()"></unauthorized>

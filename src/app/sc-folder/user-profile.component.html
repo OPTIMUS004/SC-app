@@ -1,0 +1,105 @@
+
+<div class="container">
+    <div class="text-light">
+        <h1>Edit Profile</h1>
+        <hr class="bg-light" />
+    </div>
+    
+    <form [formGroup]="editForm" class="text-light" (ngSubmit)="saveEditedProfile(editForm.value)">
+        
+        <div class="form-group">
+            <file-upload formControlName = "image" [progress]="progress"></file-upload>
+        </div>
+        <div class="form-group" [ngClass]="{'error': (lastname?.invalid && lastname?.touched)}">
+            <label for="lastname">Last name</label>
+            <br/> 
+            <input name="lastname" type="text" formControlName="lastname" placeholder="Your surname" id="lastname" class="form-control" required />
+        </div>
+            
+        <div class="form-group" [ngClass]="{'error': (firstname?.invalid && firstname?.touched)}">
+            <label for="firstname">First Name</label>
+            <em *ngIf="firstname?.invalid && firstname?.touched">Required</em>
+            <br/>
+            <input name="firstname" type="text" formControlName="firstname" class="form-control" placeholder="Enter  firstname" required />
+        </div>
+
+        <div class="form-group">
+            <label for="birthday">Birthday:</label>
+            <br/>
+            <div formGroupName="birthday" class="flex-container">
+                <div>
+                    <input type="number" maxLength="2" class="form-control" formControlName = "day" placeholder="dd" id="day" title="disabled" />
+                </div>
+                <div> 
+                    <input type="number" class="form-control" formControlName="month" placeholder="mm" id="month" title="disabled" />
+                </div>
+                <div> 
+                    <input type="number" class="form-control" formControlName="year" placeholder="yyyy" id="year" title="disabled" />
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group" [ngClass]="{'error': (email.invalid && email?.touched)}">
+            <label for="email">Email Address</label>
+            <br/>
+            <input name="email" type="text" formControlName="email" class="form-control" placeholder="john@example.com" id="email" required />
+        </div>
+
+        <div class="form-group" [ngClass]="{'error': (username?.invalid && username?.touched)}">
+            <label for="username">Username</label>
+            <br/>
+            <input name="username" type="text" formControlName="username" placeholder="Username" class="form-control" id="username" required />
+        </div>
+
+
+        <div class="form-group" [ngClass]="{'error': (password?.invalid && password?.touched)}">
+            <label for="password">Password</label>
+            <em *ngIf="password?.invalid && password?.touched">Cannot be less than eight characters</em>
+            <br/>
+            <input name="password" type="password" class="form-control" formControlName="password" placeholder="password" id="password" required />
+        </div>
+
+        <div class="form-group" [ngClass]="{'error': (password?.invalid && password?.touched)}">
+            <label for="confirmPassword">Confirm password</label>
+            <em *ngIf="password?.invalid && password?.touched">Must be the same as "Password"</em>
+            <br/>
+            <input name="confirmPassword" type="password" formControlName="confirmPassword" placeholder="confirm password" class="form-control" id="cpassword" required />
+        </div>
+        
+        <div class="form-group" [ngClass]="{'error': (editForm.controls.rStatus?.invalid && editForm.controls.rStatus?.touched)}">
+            <label for="rStatus">Marital Status</label>
+            <br/>
+            <select name="rStatus" type="radio" formControlName="username" class="form-control" placeholder="" id="rStatus" required>
+                <option value="single" selected>Single</option>
+                <option value="married">Married</option>
+                <option value="divorced">Divorced</option>
+            </select>
+        </div>
+
+        <div class="form-group" [ngClass]="{'error': (kids?.invalid && kids?.touched)}">
+            <label for="kids">Have any kids?</label>
+            <br/>
+            <select name="kids" type="checkbox" formControlName="kids" value="none" class="checkbox" id="kids" required >
+                <option>Choose option</option>
+                <option>Yes</option>
+                <option>No</option>
+            </select>
+       </div>
+
+       <div class="form-group" [ngClass]="{'error': (gender.invalid && gender?.touched)}">
+            <label for="gender">Gender</label>
+            <br/>
+            <input name="gender" type="text" formControlName="gender" class="form-control" id="gender" />
+       </div>
+
+       <div class="form-group" [ngClass]="{'error': (aboutYou.invalid && aboutYou?.touched)}">
+            <label for="AboutYou">About You</label>
+            <br/>
+            <textarea name="aboutYou" type="text" formControlName="aboutYou" class="form-control" id="aboutYou">Brief Summary about Yourself...</textarea>
+       </div>
+        
+
+        <button type="submit" class="btn btn-success">Save</button>
+        <button type="button" class="btn btn-primary" (click)="cancel()">Cancel</button>
+    </form>
+</div>

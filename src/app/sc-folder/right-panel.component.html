@@ -1,0 +1,95 @@
+<div class="container content-one">
+        <div class="side-nav">WELCOME <strong>{{user?.username | uppercase}}</strong></div>
+        <div class="side-nav">
+            <a [routerLink]= "['/edit-profile']">EDIT PROFILE</a>
+        </div>
+        <div>
+            <h6 class="bg-dark text-light pl-2 pr-2 pt-2 pb-2 mb-0 preference">SET PREFERENCE</h6>
+            <form [formGroup]="agePreferenceForm">
+            <collapsible-well class="entire-collapsible" >
+                <div well-title class="collapsible-title" (click)= "close=false">
+                <span class="p-2 pb-2">AGE</span>
+                </div>
+                <div well-body class="collapsible-body" *ngIf="!close">
+                    <div formGroupName="ageRange">
+
+                        <div class="form-group">
+                            <input type ="checkbox" value="youngestSet" formControlName="youngestSet" class="checkbox"/>
+                            <span class="mr-2">18-25</span>
+                        </div>
+
+                        <div class="form-group">
+                            <input type ="checkbox"  value="youngerSet" formControlName="youngerSet" class="checkbox"/>
+                            <span class="mr-2">25-30</span>
+                        </div>
+
+                        <div class="form-group">
+                            <input type ="checkbox" value="oldSet" formControlName="oldSet" class="checkbox"/>
+                            <span class="mr-2">30-35</span>
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type ="checkbox" value="olderSet" formControlName="olderSet" class="checkbox"/>
+                            <span class="mr-2">35 & above</span>
+                        </div>           
+                    </div>
+                </div>
+            </collapsible-well>
+            <collapsible-well class="entire-collapsible" >
+                <div well-title class="collapsible-title" (click)= "close=false">
+                <span class="p-2 pt-2">EMPLOYMENT STATUS</span>
+                </div>
+                <div well-body class="collapsible-body" *ngIf="!close">
+                    <div formGroupName="employmentStatus">
+
+                        <div class="form-group">
+                            <input type ="checkbox" formControlName="employed" class="checkbox"/>
+                            <span class="mr-2">Employed</span>
+                        </div>
+
+                        <div class="form-group">
+                            <input type ="checkbox" formControlName="selfEmployed" class="checkbox"/>
+                            <span class="mr-2">Self Employed</span>
+                        </div>
+
+                        <div class="form-group">
+                            <input type ="checkbox" formControlName="unemployed" class="checkbox"/>
+                            <span class="mr-2">Unemployed</span>
+                        </div>
+
+                    </div>
+                </div>
+            </collapsible-well>
+            <collapsible-well class="entire-collapsible" >
+                <div well-title class="collapsible-title" (click)= "close=false">
+                <span class="p-2 pt-2">EDUCATION LEVEL</span>
+                </div>
+                <div well-body class="collapsible-body" *ngIf="!close">
+                    <div formGroupName="education">
+                        <div class="form-group">
+                            <input type ="checkbox" formControlName="masters" class="checkbox"/>
+                            <span class="mr-2">Masters and More</span>
+                        </div>
+                        <div class="form-group">
+                            <input type ="checkbox" formControlName="bachelor" class="checkbox"/>
+                            <span class="mr-2">Bachelors Degree</span>
+                        </div>
+                        <div class="form-group">
+                            <input type ="checkbox" formControlName="higherDiploma" class="checkbox"/>
+                            <span class="mr-2">Higher Diploma</span>
+                        </div>
+                        <div class="form-group">
+                            <input type ="checkbox" formControlName="nationalDiploma" class="checkbox"/>
+                            <span class="mr-2">National Diploma</span>
+                        </div>
+                        <div class="form-group">
+                            <input type ="checkbox" formControlName="ssce" class="checkbox"/>
+                            <span class="mr-2">SSCE Certificate</span>
+                        </div>
+                    </div>
+                </div>
+            </collapsible-well>
+            <button type="submit" (click)="closeToggle(agePreferenceForm.value)" class="btn btn-primary">Set</button>
+            </form>
+        </div>
+    </div>

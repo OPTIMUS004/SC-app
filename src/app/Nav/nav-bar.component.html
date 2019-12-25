@@ -1,0 +1,38 @@
+
+                <nav [ngClass]="{'style-bg': (auth.isAuthenticated())}">
+                    <div class="navbar-brand">
+                       <a (click)="toHomeOrDetailsPage()"> <img src="/assets/images/SCavatar.png" class="sc-logo" alt="SoulConnect" /></a>
+                    </div>
+                    <div class="navbar">
+                        <div class="navbar-nav" *ngIf="!auth.isAuthenticated()">
+                            <div class="nav-item left">
+                                <a class="text-light" modal-trigger="loginBlock"><strong>Login</strong></a>
+							</div>
+						</div>
+						<div class="navbar-nav mr-2" *ngIf="auth.isAuthenticated()">
+							<div class="nav-item left">
+								<a class="text-light"><strong>INBOX</strong></a>
+							</div>
+						</div>
+						<div class="navbar-nav ml-2" *ngIf="auth.isAuthenticated()">
+							<div class="nav-item left">
+								<a class="text-light" (click)="logout()" ><strong>LOGOUT</strong></a>
+							</div>
+						</div>
+                    </div>
+				</nav>
+				<simple-modal elementId="loginBlock" class="modalContainer">
+					<form [formGroup]="loginForm" autocomplete="off">
+						<div class="form-group">
+							<input class="form-control" formControlName="userName" type='text' placeholder="Username..." />
+							<i class="fa fa-user"></i>
+						</div>
+						<div class="form-group">
+							<input formControlName="password" class="form-control" type='password' class="form-control" placeholder="Password..." />
+							<i class="fa fa-password"></i>
+						</div>
+						<button (click)="loginUser(loginForm.value)" class="btn btn-primary shadow comment-one" data-dismiss="modal" type="submit">Login</button>
+						<button class="btn btn-default shadow comment-two" type="button" data-dismiss="modal">Cancel</button>
+					</form>
+					<span class="bg-dark empty-span"></span>
+				</simple-modal>
