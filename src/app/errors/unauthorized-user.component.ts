@@ -1,11 +1,12 @@
   import { Component } from '@angular/core';
+  import { Router } from '@angular/router'
 
   @Component({
   selector: 'unauthorized',
   template: `
     <div class="bg-white text-center">
       <h1 class="errorMessage">Unauthorized Access.</h1>
-      <h4><a class="text-blue" [routerLink]="['/soul-connect']" >Login</a> to continue</h4>
+      <h4><a class="text-blue" (click)="home()" >Login</a> to continue</h4>
     </div>
   `,
   styles: [`
@@ -26,7 +27,10 @@
   })
 
   export class UnauthorizedUserComponent {
-  	constructor() {
+  	constructor(private router:Router ) {
 
-  	}
+    }
+    home(){
+      this.router.navigate(['/soul-connect'])
+    }
   }

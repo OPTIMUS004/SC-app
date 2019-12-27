@@ -88,7 +88,7 @@ export class NavBarComponent {
 
         if(this.userIsValid){
             this.loginForm.reset();
-            this.router.navigate([`/soul-connect/${this.auth.currentUser.username}`])
+            this.router.navigate([`/user/${this.auth.currentUser.username}`])
         }else{
             alert("Invalid username or Password")
         }    
@@ -99,7 +99,7 @@ export class NavBarComponent {
     }
     toHomeOrDetailsPage(){
         if(this.userIsValid){
-            this.router.navigate([`/soul-connect/${this.auth.currentUser.username}`])
+            this.router.navigate([`/user/${this.auth.currentUser.username}`])
         }else{
             this.router.navigate(['/soul-connect'])
         }

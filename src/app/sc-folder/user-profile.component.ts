@@ -87,7 +87,7 @@ export class UserProfileComponent implements OnInit{
         this.router.navigate([`./soul-connect/${this.userProfile.username}`])
     }
     saveEditedProfile(formValue){
-        console.log(formValue);
+        
        if(formValue.password === formValue.confirmPassword){
            this.auth.EditProfile(formValue)
            this.router.navigate([`./soul-connect/${this.userProfile.username}`])

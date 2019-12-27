@@ -9,7 +9,7 @@ export class HttpInterceptorService implements HttpInterceptor {
     constructor(){}
     intercept(req: HttpRequest<any>, next: HttpHandler): 
     Observable<HttpEvent<any>> {
-        console.log(`interceptor works: ${req.url}`);
+        
 
         let jsonReq: HttpRequest<any> = req.clone({
             setHeaders: {'Content-Type': 'application/json'}

@@ -190,9 +190,7 @@ userHasLiked(user){
 msgChap(){
 
         this.auth.generateMsgForChap()
-        this.auth.msgchap().subscribe(
-            data => console.log(data)
-        )
+        this.auth.msgchap().subscribe()
     
     }
 }

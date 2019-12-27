@@ -4,7 +4,8 @@ import { ActivatedRoute } from '@angular/router'
 
 @Component ({
     template:`
-        <div class="container text-light">
+    <div *ngIf="auth.isAuthenticated()">
+        <div class="container text-light" *ngIf="auth.isAuthenticated()">
             <h1>Potential Fancy</h1>
             <hr class="bg-light" />
         </div>
@@ -32,6 +33,8 @@ import { ActivatedRoute } from '@angular/router'
                 
             </div>
         </div>
+    </div>
+        <unauthorized *ngIf="!auth.isAuthenticated()"></unauthorized>
     `,
     styles: [`
                 .title{

@@ -42,7 +42,6 @@ export class SimpleModalComponent {
 
 	closeModal() {
 		if (this.closeOnBodyClick === 'false') {
-			console.log(this.containerEl)
 		this.$(this.containerEl.nativeElement).modal('hide');
 		}
 	}

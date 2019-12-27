@@ -1,4 +1,4 @@
-<div class="flex-container bg-white mt-4">
+<div class="flex-container bg-white mt-4" *ngIf="auth.isAuthenticated()">
     <right-panel class="right-panel" [user]="user">
     </right-panel>
     <div class="col-sm-8 holder">
@@ -31,11 +31,11 @@
                                 <span class="username"><strong>{{user?.username | uppercase}}</strong></span><br/>
                                 <span class="title">Occupation: {{user.workStatus?.occupation}}</span><br/>
                                 <span>Age: {{user?.age}}</span><br/>
-                                <span>{{user?.rStatus}}</span><br/>
+                                <span>Status: {{user?.rStatus}}</span><br/>
                             </div>
                         </div>
                         <div class="bg-dark text-center">
-                            <span class="text-light" [routerLink] = "['/soul-connect/users',user?.username]"><a>More Details</a></span>
+                            <span class="text-light" [routerLink] = "['/soul-connect/users',user?.username]"><a class="btn btn-success">More Details</a></span>
                             <favorite (like)="toggleFavorite(user)" [liked]="userHasLiked(user)"></favorite>
                         </div>
                     </div>
@@ -50,8 +50,7 @@
 
         <div>Contact your Chaperone
             <form (ngSubmit)="msgChap()">
-                <input type="text" name="name" />
-                <button type="submit" class="btn default">Share Fancy with Chaperone</button>
+                <button type="submit" class="btn btn-primary">Share Fancy with Chaperone</button>
             </form>
         </div>
     </div>

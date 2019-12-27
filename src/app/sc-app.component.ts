@@ -7,6 +7,7 @@ import { AuthService } from './sc-folder/shared/auth.service';
   		<div class="body-bg" [ngClass]="{'style-bg': (auth.isAuthenticated())}">  
   			<nav-bar></nav-bar>		
 			<router-outlet></router-outlet>
+			<footer></footer>
 		</div>
 	  `,
   styles: [`

@@ -1,4 +1,3 @@
-
                 <nav [ngClass]="{'style-bg': (auth.isAuthenticated())}">
                     <div class="navbar-brand">
                        <a (click)="toHomeOrDetailsPage()"> <img src="/assets/images/SCavatar.png" class="sc-logo" alt="SoulConnect" /></a>
@@ -11,12 +10,12 @@
 						</div>
 						<div class="navbar-nav mr-2" *ngIf="auth.isAuthenticated()">
 							<div class="nav-item left">
-								<a class="text-light"><strong>INBOX</strong></a>
+								<a class="text-light"><strong>Inbox</strong></a>
 							</div>
 						</div>
 						<div class="navbar-nav ml-2" *ngIf="auth.isAuthenticated()">
 							<div class="nav-item left">
-								<a class="text-light" (click)="logout()" ><strong>LOGOUT</strong></a>
+								<a class="text-light" (click)="logout()" ><strong>Logout</strong></a>
 							</div>
 						</div>
                     </div>

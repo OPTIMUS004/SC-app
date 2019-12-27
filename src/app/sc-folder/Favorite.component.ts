@@ -4,8 +4,11 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 @Component({
     selector: 'favorite',
     template: `<div (click)="onClick()">
-                    <div [style.color]="iconColor"><b>+</b>Add as Fancy</div>
-                </div>`
+                    <div [style.color]="iconColor" class="pointable"><b>+</b>Add as Fancy</div>
+                </div>`,
+    styles: [`
+                .pointable{cursor: pointer}
+            `]
 })
 
 export class favoriteComponent {
