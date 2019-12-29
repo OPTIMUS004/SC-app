@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthService } from './sc-folder/shared/auth.service';
+import { AuthService } from './sc-folder/services/auth.service';
 
 @Component({
   selector: 'sc-app',

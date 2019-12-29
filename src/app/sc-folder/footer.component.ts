@@ -4,8 +4,7 @@ import { Component } from '@angular/core';
     template: `<div class="bg-dark">
                  copyright integral concept
                </div>
-    `,
-	styles: []
+    `
 })
 
 export class FooterComponent {

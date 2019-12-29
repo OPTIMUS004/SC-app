@@ -164,18 +164,19 @@ generateMsgForChap(){
 
 msgchap(){
   
-  return this.http.post('https://www.formspree.io/macbrill13@gmail.com', this.msgBody)
+  return this.http.post('www.formspree.io/macbrill13@gmail.com', this.msgBody)
 
 }
 
-isAuthenticated(){  
+isAuthenticated(){
+      console.log(this.currentUser);
       return !!this.currentUser;
     }
   
 }
 
 const users = [
-                {id: "1",
+                {
                  firstname: "Ayoola",
                  lastname: "Taiwo",
                  username: "integral",
@@ -196,7 +197,7 @@ const users = [
                  proposes:[""],
                  aboutYou:"a muslim, would love to be with someone who is ready to start a family"
                 },
-                {id: "2",
+                {
                  firstname: "Malala",
                  lastname: "Chuks",
                  username: "Wells",
@@ -217,7 +218,7 @@ const users = [
                  salary:"10000",
                  aboutYou:"a muslim, would love to be with someone who is ready to start a family"
                 },
-                {id: "3",
+                {
                  firstname: "Babs",
                  lastname: "Oje",
                  username: "Dibu",
@@ -238,7 +239,7 @@ const users = [
                  favorite:[""],
                  proposes:[""],
                 },
-                {id: "4",
+                {
                  firstname: "Muse",
                  lastname: "Bola",
                  username: "bold",
@@ -258,7 +259,8 @@ const users = [
                  workStatus:{employed: true, occupation: 'teacher' },
                  salary:"10000",
                  aboutYou:"a muslim, would love to be with someone who is ready to start a family"
-                },{id: "1",
+                },
+                {
                 firstname: "Ayoola",
                 lastname: "kehinde",
                 username: "kennyket",
@@ -279,7 +281,7 @@ const users = [
                 salary:"10000",
                 aboutYou:"a muslim, would love to be with someone who is ready to start a family"
                },
-               {id: "2",
+               {
                 firstname: "Pitan",
                 lastname: "Charles",
                 username: "SlayQ",
@@ -300,7 +302,7 @@ const users = [
                 salary:"10000",
                 aboutYou:"a muslim, would love to be with someone who is ready to start a family"
                },
-               {id: "3",
+               {
                firstname: "Nonso",
                lastname: "Alaba",
                username: "Jeff",
@@ -321,7 +323,7 @@ const users = [
                salary:"10000",
                aboutYou:"a muslim, would love to be with someone who is ready to start a family"
               },
-              {id: "4",
+              {
               firstname: "Chukundi",
               lastname: "Elisa",
               username: "Georgia",
@@ -343,7 +345,6 @@ const users = [
               aboutYou:"a muslim, would love to be with someone who is ready to start a family"
              },
              {
-                id: "5",
                 firstname: "adrian",
                 lastname: "Donovan",
                 username: "Mississippi",
@@ -365,7 +366,7 @@ const users = [
                 aboutYou:"a muslim, would love to be with someone who is ready to start a family"
                },
                {
-                 id: "6",
+                
                 firstname: "judy",
                 lastname: "Bobby",
                 username: "Tilda",
@@ -386,7 +387,7 @@ const users = [
                 salary:"10000",
                 aboutYou:"a muslim, would love to be with someone who is ready to start a family"
                },
-               {id: "7",
+               {
                 firstname: "Mabinu",
                 lastname: "ayeola",
                 username: "Jordy",
@@ -407,7 +408,7 @@ const users = [
                 salary:"10000",
                 aboutYou:"a muslim, would love to be with someone who is ready to start a family"
                },
-               {id: "8",
+               {
                 firstname: "Sekono",
                 lastname: "Goke",
                 username: "baoku",
@@ -428,7 +429,7 @@ const users = [
                 salary:"10000",
                 aboutYou:"a muslim, would love to be with someone who is ready to start a family"
                },
-               {id: "9",
+               {
                 firstname: "Toa",
                 lastname: "Ukulele",
                 username: "Founder",
@@ -445,7 +446,7 @@ const users = [
                 educationLevel:"spinster",
                 ethnicity:"yoruba",
                 religionSect: "none",
-                workStatus:{employed: true, occupation: 'teacher' },
+                workStatus: {employed: true, occupation: 'teacher' },
                 salary:"10000",
                 aboutYou:"a muslim, would love to be with someone who is ready to start a family"
                }
@@ -454,6 +455,6 @@ const chaperones = [
           {username: "Ay", email:"macndoe.com"},
           {username: "By", email:"integraldoe.com"},
           {username: "Cy", email:"brilldoe.com"}
-  ]
+        ]
 
     

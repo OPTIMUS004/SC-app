@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, EventEmitter }from '@angular/core'
 import { FormGroup, FormControl } from '@angular/forms'
-import { AuthService } from '../sc-folder/shared/auth.service';
+import { AuthService } from '../sc-folder/services/auth.service';
 
 @Component({
     selector: 'right-panel',

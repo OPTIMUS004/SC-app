@@ -16,15 +16,15 @@ import { CreateAccountComponent } from './sc-folder/create-account.component';
 import { FullDetailsComponent } from './sc-folder/full-details.component'
 import { ScHomepageComponent } from './sc-folder/sc-homepage.component';
 import { FileUploadComponent } from './sc-folder/File-upload.component';
-import { AuthService } from './sc-folder/shared/auth.service'
+import { AuthService } from './sc-folder/services/auth.service'
 import { SiteRouteActivator } from '../common/route-activator.service';
 import { UserProfileComponent } from './sc-folder/user-profile.component';
 import { UploadProgressComponent } from './sc-folder/upload-progress.component';
 
-import { HttpInterceptorService } from './sc-folder/shared/httpInterceptor.interceptor';
-import { LogResponseInterceptor } from './sc-folder/shared/log-response.interceptor';
-import { HttpCacheService } from './sc-folder/shared/http-cache.service';
-import { CacheInterceptor } from './sc-folder/shared/cache.intercptor';
+import { HttpInterceptorService } from './sc-folder/services/httpInterceptor.interceptor';
+import { LogResponseInterceptor } from './sc-folder/services/log-response.interceptor';
+import { HttpCacheService } from './sc-folder/services/http-cache.service';
+import { CacheInterceptor } from './sc-folder/services/cache.intercptor';
 import { RouterModule } from '@angular/router';
 import { FooterComponent } from './sc-folder/footer.component'
 import { SharedModule } from 'src/common/shared.module';

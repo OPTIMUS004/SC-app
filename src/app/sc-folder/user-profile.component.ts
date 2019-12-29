@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
-import { AuthService } from '../sc-folder/shared/auth.service';
+import { AuthService } from './services/auth.service';
 import { Router } from '@angular/router';
-import { requiredFileType } from './shared/requiredFileType.validator'
+import { requiredFileType } from './services/requiredFileType.validator'
 
 @Component({
     selector: 'user-profile',

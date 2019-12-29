@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core'
-import { AuthService } from '../sc-folder/shared/auth.service'
+import { AuthService } from '../sc-folder/services/auth.service'
 import { ActivatedRoute, Params } from '@angular/router'
 import { trigger, state, style, transition, animate } from '@angular/animations'
 

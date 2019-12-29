@@ -1,5 +1,5 @@
 import { Router, ActivatedRouteSnapshot, CanActivate, ActivatedRoute } from '@angular/router'
-import { AuthService } from '../app/sc-folder/shared/auth.service'
+import { AuthService } from '../app/sc-folder/services/auth.service'
 import { Injectable } from '@angular/core'
 
 @Injectable()

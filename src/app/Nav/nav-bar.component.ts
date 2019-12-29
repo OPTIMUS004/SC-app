@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core'
-import { AuthService } from '../sc-folder/shared/auth.service';
+import { AuthService } from '../sc-folder/services/auth.service';
 import { Router } from '@angular/router';
 import { JQ_TOKEN } from '../../common/jQuery.service'
 import {FormControl, FormGroup, Validators} from '@angular/forms'
