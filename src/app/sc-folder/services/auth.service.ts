@@ -196,7 +196,7 @@ msgchap(){
   })}
   
   
-  return this.http.post('www.formspree.io/macbrill13@gmail.com', this.msgBody, options)
+  return this.http.post('http://www.formspree.io/macbrill13@gmail.com', this.msgBody, options)
 
 }
 
