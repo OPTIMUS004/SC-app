@@ -83,16 +83,9 @@ export class NavBarComponent {
         })
     }
     loginUser(loginDetails){
-        this.auth.loginUser(loginDetails.userName, loginDetails.password);
-        this.userIsValid = this.auth.isAuthenticated();
-
-        if(this.userIsValid){
-            this.loginForm.reset();
-            this.router.navigate([`/user/${this.auth.currentUser.username}`])
-        }else{
-            alert("Invalid username or Password")
-        }    
-    }
+        this.auth.loginUser(loginDetails.userName, loginDetails.password)
+          
+}
     logout(){
         this.auth.logout();
         this.router.navigate(['/soul-connect'])

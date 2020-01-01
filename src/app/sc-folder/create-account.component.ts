@@ -88,8 +88,6 @@ saveUser(usersInput){
 if(usersInput.confirmPassword === usersInput.password && this.loginForm.valid){
     this.auth.saveNewUser(
         usersInput.username, usersInput.gender, usersInput.birthday, usersInput.email, usersInput.password
-    )
-    this.router.navigate([`/soul-connect/${this.auth.currentUser.username}`])
-}
-}
+    )}
+    }
 }

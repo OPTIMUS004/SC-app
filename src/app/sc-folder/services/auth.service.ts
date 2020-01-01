@@ -2,6 +2,7 @@ import { Injectable, EventEmitter } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http'
 import { catchError, tap } from 'rxjs/operators'
 import { Observable, of } from 'rxjs'
+import { Router } from '@angular/router';
 
 @Injectable()
 
@@ -9,9 +10,11 @@ export class AuthService {
 
 currentUser;
   msgBody: string;
-constructor(private http:HttpClient){}
+  readonly baseURL = 'http://localhost:3000/users/';
+constructor(private http:HttpClient, private router: Router){}
 getUsers(){  
   //calculate age of each user before returning
+  
     let usersList = users.slice(0);
     let presentYear = new Date().getFullYear();
         usersList.forEach(user => {
@@ -28,29 +31,50 @@ getUsers(){
           return { user:user }
         }
         usersList.map(mapUsers, chaperones );
-        return usersList;
+        return usersList; 
   }
 getId(name) {
       return  users.find( user => user.username === name)
     }
 loginUser(userName:string, password:string){
+
+/*
   users.some((user) => {
 		if (user.username === userName && user.password === password){
        this.currentUser = user;
+       console.log(this.currentUser)
        return this.currentUser
       }else{
         this.currentUser = undefined;
       }
     })
+*/
+    let userCredential = {"username": userName, "password": password }
+    return this.http.post(this.baseURL + 'login', userCredential)
+    .subscribe( userData => {
+      this.currentUser = userData;
+      console.log(userData , this.isAuthenticated())
+  if(this.isAuthenticated()){
+      this.router.navigate([`/user/${this.currentUser.username}`])
+      console.log("User is valid:"+ this.isAuthenticated())
+  }else{
+      console.log(this.isAuthenticated()+" user is invalid");
+      alert("Invalid username or Password")
+
+  } 
+  return this.currentUser, this.isAuthenticated();
+}); 
+    
   }
+
 logout(){
     this.currentUser = undefined;
   }
 saveNewUser(username, gender, birthday, email, password){
-  let newUser = {id: "1",
+  let newUser = {
   firstname: "",
   lastname: "",
-  favorite: [""],
+  favorite: [],
   proposes:[""],
   username: username,
   password: password,
@@ -69,8 +93,10 @@ saveNewUser(username, gender, birthday, email, password){
   aboutYou:"",
   chaperone: ""
  }
+ this.http.post(this.baseURL, newUser).subscribe()
  users.push(newUser);
  this.loginUser(newUser.username, newUser.password)
+
 
 }
 EditProfile(editedProfile)
@@ -119,6 +145,7 @@ deleteLike(user){
 	this.currentUser.favorite.splice(user,1)
 }
 addLike(user){
+
   this.currentUser.favorite.push(user);
   users.forEach(element => {
     if(element === user){
@@ -143,33 +170,39 @@ generateMsgForChap(){
   || this.currentUser.favorite.length == "null"
   || this.currentUser.favorite.length == 0){
     alert("Select fancies")
-  }else if((this.currentUser.favorite.length > 2) || (this.currentUser.favorite.length< 2)){
+  }else if((this.currentUser.favorite.length > 2)){
     alert("You can only pick two fancies");
   }else{
     console.log(this.currentUser.favorite);
     fancyOne = this.currentUser.favorite[0]['username'] ;
-    fancyTwoFullName = `${this.currentUser.favorite[1]['firstname']} ${this.currentUser.favorite[1]['lastname']}`;
+    fancyOneFullName = `${this.currentUser.favorite[0]['firstname']} ${this.currentUser.favorite[0]['lastname']}`;
     fancyTwoFullName = `${this.currentUser.favorite[1]['firstname']} ${this.currentUser.favorite[1]['lastname']}`;
     fancyTwo = this.currentUser.favorite[1]['username'];
+    
     this.msgBody = `Assalamalaykum waramotullah,\n
   Hope this message meets you well.\n
   After carefully looking through the available Fancies.\n
   I fancy the following profile(s).\n
-  1. ${fancyOneFullName} A.K.A ${fancyOne}\n
-  2. ${fancyTwoFullName} A.K.A ${fancyTwo}\n
+  1. ${fancyOneFullName} with username ${fancyOne}\n
+  2. ${fancyTwoFullName} with username ${fancyTwo}\n 
   `;
   }
   
 }
 
 msgchap(){
+  const options = { headers: new HttpHeaders({
+    'Content-Type':'applicstion/json', 
+    'Accept': 'application/x-www-form-urlencoded'
+  })}
+  console.log(this.msgBody)
   
-  return this.http.post('www.formspree.io/macbrill13@gmail.com', this.msgBody)
+  return this.http.post('www.formspree.io/macbrill13@gmail.com', this.msgBody, options)
 
 }
 
 isAuthenticated(){
-      console.log(this.currentUser);
+      
       return !!this.currentUser;
     }
   

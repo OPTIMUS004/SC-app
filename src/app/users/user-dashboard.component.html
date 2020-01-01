@@ -42,17 +42,6 @@
             </div>
         </div>
     </div>
-    <div class ="col-sm-2 content-three">
-        <div class="fancy">
-            <h5>Your Fancies</h5>
-            <likes [@fadeInOut]></likes>
-        </div>
-
-        <div>Contact your Chaperone
-            <form (ngSubmit)="msgChap()">
-                <button type="submit" class="btn btn-primary">Share Fancy with Chaperone</button>
-            </form>
-        </div>
-    </div>
+    <left-panel></left-panel>
 </div>
 <unauthorized *ngIf="!auth.isAuthenticated()"></unauthorized>

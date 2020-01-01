@@ -4,7 +4,7 @@ import { ActivatedRoute, Params } from '@angular/router'
 import { trigger, state, style, transition, animate } from '@angular/animations'
 
 @Component({
-    templateUrl:  './details-page.component.html',
+    templateUrl:  './user-dashboard.component.html',
         styles: [`
                 .flex-container{
                     display: flex;
@@ -69,7 +69,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
         )]
 })
 
-export class DetailsPageComponent implements OnInit {
+export class UserDashboardComponent implements OnInit {
     user
     users:any
     filterUsers: {}
@@ -187,10 +187,5 @@ toggleFavorite(user){
 userHasLiked(user){
 		return this.auth.userHasLiked(user) 
 	}
-msgChap(){
 
-        this.auth.generateMsgForChap()
-        this.auth.msgchap().subscribe()
-    
-    }
 }
