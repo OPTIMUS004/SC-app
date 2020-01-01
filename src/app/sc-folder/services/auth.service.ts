@@ -42,7 +42,7 @@ loginUser(userName:string, password:string){
   users.some((user) => {
 		if (user.username === userName && user.password === password){
        this.currentUser = user;
-       console.log(this.currentUser)
+       
        return this.currentUser
       }else{
         this.currentUser = undefined;
@@ -53,12 +53,11 @@ loginUser(userName:string, password:string){
     return this.http.post(this.baseURL + 'login', userCredential)
     .subscribe( userData => {
       this.currentUser = userData;
-      console.log(userData , this.isAuthenticated())
   if(this.isAuthenticated()){
       this.router.navigate([`/user/${this.currentUser.username}`])
-      console.log("User is valid:"+ this.isAuthenticated())
+      
   }else{
-      console.log(this.isAuthenticated()+" user is invalid");
+      
       alert("Invalid username or Password")
 
   } 
@@ -173,7 +172,7 @@ generateMsgForChap(){
   }else if((this.currentUser.favorite.length > 2)){
     alert("You can only pick two fancies");
   }else{
-    console.log(this.currentUser.favorite);
+    
     fancyOne = this.currentUser.favorite[0]['username'] ;
     fancyOneFullName = `${this.currentUser.favorite[0]['firstname']} ${this.currentUser.favorite[0]['lastname']}`;
     fancyTwoFullName = `${this.currentUser.favorite[1]['firstname']} ${this.currentUser.favorite[1]['lastname']}`;
@@ -195,7 +194,7 @@ msgchap(){
     'Content-Type':'applicstion/json', 
     'Accept': 'application/x-www-form-urlencoded'
   })}
-  console.log(this.msgBody)
+  
   
   return this.http.post('www.formspree.io/macbrill13@gmail.com', this.msgBody, options)
 
