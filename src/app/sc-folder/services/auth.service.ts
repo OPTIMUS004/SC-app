@@ -38,18 +38,18 @@ getId(name) {
     }
 loginUser(userName:string, password:string){
 
-/*
+
   users.some((user) => {
 		if (user.username === userName && user.password === password){
        this.currentUser = user;
-       
+       this.router.navigate([`/user/${this.currentUser.username}`])
        return this.currentUser
       }else{
         this.currentUser = undefined;
       }
     })
-*/
-    let userCredential = {"username": userName, "password": password }
+
+/*    let userCredential = {"username": userName, "password": password }
     return this.http.post(this.baseURL + 'login', userCredential)
     .subscribe( userData => {
       this.currentUser = userData;
@@ -63,7 +63,7 @@ loginUser(userName:string, password:string){
   } 
   return this.currentUser, this.isAuthenticated();
 }); 
-    
+   */ 
   }
 
 logout(){
@@ -92,7 +92,7 @@ saveNewUser(username, gender, birthday, email, password){
   aboutYou:"",
   chaperone: ""
  }
- this.http.post(this.baseURL, newUser).subscribe()
+// this.http.post(this.baseURL, newUser).subscribe()
  users.push(newUser);
  this.loginUser(newUser.username, newUser.password)
 
