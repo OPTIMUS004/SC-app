@@ -1,5 +1,5 @@
-import { Component, Input, OnInit, EventEmitter }from '@angular/core'
-import { FormGroup, FormControl } from '@angular/forms'
+import { Component, Input, OnInit, EventEmitter }from '@angular/core';
+import { FormGroup, FormControl } from '@angular/forms';
 import { AuthService } from '../sc-folder/services/auth.service';
 
 @Component({
@@ -49,10 +49,10 @@ import { AuthService } from '../sc-folder/services/auth.service';
     `]
 })
 
-export class RightPanelComponent implements OnInit{
+export class RightPanelComponent implements OnInit {
     @Input() user;
-    close: boolean = false;
-    agePreferenceForm: FormGroup
+    close = false;
+    agePreferenceForm: FormGroup;
     private youngestSet: FormControl;
     private youngerSet: FormControl;
     private oldSet: FormControl;
@@ -67,12 +67,12 @@ export class RightPanelComponent implements OnInit{
     private masters: FormControl;
     private education: FormGroup;
     private employmentStatus: FormGroup;
-    private ageRange : FormGroup;
+    private ageRange: FormGroup;
 
 
-constructor(private auth:AuthService){}
+constructor(private auth: AuthService) {}
 
-    ngOnInit(){
+    ngOnInit() {
         this.masters = new FormControl();
         this.bachelor = new FormControl();
         this.higherDiploma = new FormControl();
@@ -90,31 +90,31 @@ constructor(private auth:AuthService){}
             youngerSet: this.youngerSet,
             oldSet: this.oldSet,
             olderSet: this.olderSet
-        })
+        });
         this.employmentStatus = new FormGroup({
             unemployed: this.unemployed,
             employed: this.employed,
             selfEmployed: this.selfEmployed
-        })
+        });
         this.education = new FormGroup({
             masters: this.masters,
             bachelor: this.bachelor,
             higherDiploma: this.higherDiploma,
             nationalDiploma: this.nationalDiploma,
             ssce: this.ssce
-            
-        })
+
+        });
 
         this.agePreferenceForm = new FormGroup({
             ageRange: this.ageRange,
             employmentStatus: this.employmentStatus,
             education: this.education
 
-        })
+        });
     }
 
-    closeToggle(formValue){
-        this.auth.updateAgePreference(formValue)
+    closeToggle(formValue) {
+        this.auth.updateAgePreference(formValue);
         this.close = true;
     }
 }

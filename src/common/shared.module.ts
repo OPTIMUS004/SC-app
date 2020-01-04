@@ -13,7 +13,7 @@ import { ModalTriggerDirective } from './modal-trigger.directive';
         CommonModule
     ],
     declarations: [
-        
+
         SimpleModalComponent,
         LikesComponent,
         favoriteComponent,
@@ -31,4 +31,4 @@ import { ModalTriggerDirective } from './modal-trigger.directive';
     ]
 })
 
-export class SharedModule{}
+export class SharedModule {}

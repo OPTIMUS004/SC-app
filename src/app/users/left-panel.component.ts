@@ -1,4 +1,4 @@
-import { Component } from '@angular/core'
+import { Component } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { AuthService } from '../sc-folder/services/auth.service';
 
@@ -21,20 +21,20 @@ template: `
 styles: [`
 `],
 animations: [trigger ('fadeInOut', [
-    state('void',style({opacity: 0
+    state('void', style({opacity: 0
     })),
-    transition('void<=>*',animate(2000))
+    transition('void<=>*', animate(2000))
 ]
 )]
 })
 
 export class LeftPanelComponent {
 
-    constructor( private auth:AuthService){}
-    msgChap(){
+    constructor( private auth: AuthService) {}
+    msgChap() {
 
-        this.auth.generateMsgForChap()
-        this.auth.msgchap().subscribe()
-    
+        this.auth.generateMsgForChap();
+        this.auth.msgchap().subscribe();
+
     }
 }

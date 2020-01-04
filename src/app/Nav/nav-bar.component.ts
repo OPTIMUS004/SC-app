@@ -1,12 +1,12 @@
-import { Component, Inject } from '@angular/core'
+import { Component, Inject } from '@angular/core';
 import { AuthService } from '../sc-folder/services/auth.service';
 import { Router } from '@angular/router';
-import { JQ_TOKEN } from '../../common/jQuery.service'
-import {FormControl, FormGroup, Validators} from '@angular/forms'
+import { JQ_TOKEN } from '../../common/jQuery.service';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 @Component({
     selector: 'nav-bar',
     templateUrl: './nav-bar.component.html',
-    styles: [`  
+    styles: [`
                 .style-bg{
                     background-color: #bbb;
                     margin: 0 30px 0 30px;
@@ -19,7 +19,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms'
                 ul{
                     list-style-type: none;
                 }
-                .navbar{ 
+                .navbar{
                     float: right;
                     padding-right: 20px;
                 }
@@ -27,7 +27,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms'
                     float: left;
                     padding-left: 20px;
                 }
-                a{  
+                a{
                     text-decoration: none;
                     transition: 0.8s;
                 }
@@ -71,30 +71,30 @@ export class NavBarComponent {
     loginForm: FormGroup;
     user;
     userIsValid;
-    
-    constructor(private router: Router, private auth:AuthService, @Inject(JQ_TOKEN) private $:any){}
 
-    ngOnInit(){
-        let userName = new FormControl('', [Validators.required]),
-            password = new FormControl('', [Validators.required, Validators.minLength(8)])
+    constructor(private router: Router, private auth: AuthService, @Inject(JQ_TOKEN) private $: any) {}
+
+    ngOnInit() {
+        const userName = new FormControl('', [Validators.required]),
+            password = new FormControl('', [Validators.required, Validators.minLength(8)]);
         this.loginForm = new FormGroup ({
             userName,
             password
-        })
+        });
     }
-    loginUser(loginDetails){
-        this.auth.loginUser(loginDetails.userName, loginDetails.password)
-          
+    loginUser(loginDetails) {
+        this.auth.loginUser(loginDetails.userName, loginDetails.password);
+
 }
-    logout(){
+    logout() {
         this.auth.logout();
-        this.router.navigate(['/soul-connect'])
+        this.router.navigate(['/soul-connect']);
     }
-    toHomeOrDetailsPage(){
-        if(this.userIsValid){
-            this.router.navigate([`/user/${this.auth.currentUser.username}`])
-        }else{
-            this.router.navigate(['/soul-connect'])
+    toHomeOrDetailsPage() {
+        if (this.userIsValid) {
+            this.router.navigate([`/user/${this.auth.currentUser.username}`]);
+        } else {
+            this.router.navigate(['/soul-connect']);
         }
     }
 }

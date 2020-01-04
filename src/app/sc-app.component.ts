@@ -4,15 +4,15 @@ import { AuthService } from './sc-folder/services/auth.service';
 @Component({
   selector: 'sc-app',
   template: `
-  		<div class="body-bg" [ngClass]="{'style-bg': (auth.isAuthenticated())}">  
-  			<nav-bar></nav-bar>		
+  		<div class="body-bg" [ngClass]="{'style-bg': (auth.isAuthenticated())}">
+  			<nav-bar></nav-bar>
 			<router-outlet></router-outlet>
 			<footer></footer>
 		</div>
 	  `,
   styles: [`
   .body-bg{
-	
+
 	background-image: url('/assets/images/background.jpg');
 	background-size: cover;
 	background-position: center;
@@ -26,5 +26,5 @@ import { AuthService } from './sc-folder/services/auth.service';
 })
 export class SCAppComponent {
 
-  constructor(public auth:AuthService){}
+  constructor(public auth: AuthService) {}
 }

@@ -1,5 +1,5 @@
   import { Component } from '@angular/core';
-  import { Router } from '@angular/router'
+  import { Router } from '@angular/router';
 
   @Component({
   selector: 'unauthorized',
@@ -10,7 +10,7 @@
     </div>
   `,
   styles: [`
-            
+
   			.errorMessage{
   				margin-top: 150px;
                 margin-left: 30px;
@@ -27,10 +27,10 @@
   })
 
   export class UnauthorizedUserComponent {
-  	constructor(private router:Router ) {
+  	constructor(private router: Router ) {
 
     }
-    home(){
-      this.router.navigate(['/soul-connect'])
+    home() {
+      this.router.navigate(['/soul-connect']);
     }
   }

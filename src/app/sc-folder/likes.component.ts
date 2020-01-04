@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core'
-import { AuthService } from './services/auth.service'
+import { Component, OnInit } from '@angular/core';
+import { AuthService } from './services/auth.service';
 
 @Component({
     selector: 'likes',
@@ -18,11 +18,11 @@ import { AuthService } from './services/auth.service'
 })
 
 export class LikesComponent implements OnInit {
-    fanciesList
+    fanciesList;
 
-    constructor(private auth:AuthService){}
-ngOnInit(){
-    this.fanciesList = this.auth.getCurrentUserFavorite()
+    constructor(private auth: AuthService) {}
+ngOnInit() {
+    this.fanciesList = this.auth.getCurrentUserFavorite();
 }
 
 }

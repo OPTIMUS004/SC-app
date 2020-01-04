@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core'
-import { AuthService } from './services/auth.service'
-import { ActivatedRoute } from '@angular/router'
+import { Component, OnInit } from '@angular/core';
+import { AuthService } from './services/auth.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component ({
-    template:`
+    template: `
     <div *ngIf="auth.isAuthenticated()">
         <div class="container text-light" *ngIf="auth.isAuthenticated()">
             <h1>Potential Fancy</h1>
@@ -30,7 +30,7 @@ import { ActivatedRoute } from '@angular/router'
 
                     </div>
                 </div>
-                
+
             </div>
         </div>
     </div>
@@ -71,28 +71,28 @@ import { ActivatedRoute } from '@angular/router'
                         margin-right: 55px;
                     }
                     img{
-                        left: 40%; 
+                        left: 40%;
                     }
-                } 
+                }
     `]
 })
 
-export class FullDetailsComponent implements OnInit{
+export class FullDetailsComponent implements OnInit {
     viewFemale: any;
-    date = new Date()
-    age: any
-    
-    
-    constructor(private auth:AuthService, private route:ActivatedRoute){
+    date = new Date();
+    age: any;
+
+
+    constructor(private auth: AuthService, private route: ActivatedRoute) {
 
     }
-    ngOnInit(){
+    ngOnInit() {
 
     // get details fromsnapshot params
-        this.viewFemale = this.auth.getId(this.route.snapshot.params['name']);
-        
-        let thisYear = this.date.getFullYear();
-        let usersYear = this.viewFemale.birthday.year;
+        this.viewFemale = this.auth.getId(this.route.snapshot.params.name);
+
+        const thisYear = this.date.getFullYear();
+        const usersYear = this.viewFemale.birthday.year;
         this.age = thisYear - parseInt( usersYear, 10);
     }
 

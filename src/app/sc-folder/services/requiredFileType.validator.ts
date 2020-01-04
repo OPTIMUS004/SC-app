@@ -1,12 +1,12 @@
 import { FormControl } from '@angular/forms';
 
-export function requiredFileType(type: string){
+export function requiredFileType(type: string) {
 
-    return function (control:FormControl){
+    return function(control: FormControl) {
         const file = control.value;
-        if (file){
+        if (file) {
             const extension = file.name.split('.')[1].toLowerCase();
-            if (type.toLocaleLowerCase() !== extension.toLocaleLowerCase() ){
+            if (type.toLocaleLowerCase() !== extension.toLocaleLowerCase() ) {
                 return {
                     requiredFileType: true
                 };

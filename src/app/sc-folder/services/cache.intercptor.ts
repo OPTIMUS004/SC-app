@@ -1,30 +1,30 @@
-import { Injectable } from "@angular/core";
-import { HttpEvent, HttpInterceptor, HttpRequest, HttpResponse } from "@angular/common/http";
-import { Observable, of } from "rxjs";
-import { tap } from "rxjs/operators"
+import { Injectable } from '@angular/core';
+import { HttpEvent, HttpInterceptor, HttpRequest, HttpResponse } from '@angular/common/http';
+import { Observable, of } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
-import { HttpCacheService } from './http-cache.service'
+import { HttpCacheService } from './http-cache.service';
 
 @Injectable()
 
-export class CacheInterceptor implements HttpInterceptor{
-    
-    constructor( private cacheService: HttpCacheService ){}
+export class CacheInterceptor implements HttpInterceptor {
 
-    intercept(req: HttpRequest<any>, next: import("@angular/common/http").HttpHandler): Observable<HttpEvent<any>> {
-        
-        //passalong non-cacheable requests and invalidate cache
+    constructor( private cacheService: HttpCacheService ) {}
 
-            if (req.method !== 'GET' ){
+    intercept(req: HttpRequest<any>, next: import('@angular/common/http').HttpHandler): Observable<HttpEvent<any>> {
+
+        // passalong non-cacheable requests and invalidate cache
+
+            if (req.method !== 'GET' ) {
                 this.cacheService.invalidateCache();
                 return next.handle(req);
             }
 
-        //attempt to retrieve a cached response
+        // attempt to retrieve a cached response
             const cachedResponse: HttpResponse<any> =  this.cacheService.get(req.url);
 
         // return cached response
-            if (cachedResponse){
+            if (cachedResponse) {
                 return of(cachedResponse);
         }
 
@@ -32,11 +32,11 @@ export class CacheInterceptor implements HttpInterceptor{
             return next.handle(req)
             .pipe(
                 tap(event => {
-                    if (event instanceof HttpResponse){
+                    if (event instanceof HttpResponse) {
                         this.cacheService.put(req.url, event);
                     }
                 })
-            )
+            );
     }
 
 }

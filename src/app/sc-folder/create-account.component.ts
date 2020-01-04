@@ -60,21 +60,21 @@ import { Router } from '@angular/router';
 export class CreateAccountComponent {
     loginForm: FormGroup;
 
-    constructor(private auth:AuthService, private router:Router){
+    constructor(private auth: AuthService, private router: Router) {
 
     }
-ngOnInit(){
-let gender = new FormControl('',[Validators.required]),
-     day = new FormControl('',[Validators.required, Validators.maxLength(2)]),
-     month = new FormControl('',[Validators.required, Validators.maxLength(2)]),
-     year = new FormControl('',[Validators.required, Validators.maxLength(4)]),
-     username = new FormControl('',[Validators.required, Validators.maxLength(25)]),
+ngOnInit() {
+const gender = new FormControl('', [Validators.required]),
+     day = new FormControl('', [Validators.required, Validators.maxLength(2)]),
+     month = new FormControl('', [Validators.required, Validators.maxLength(2)]),
+     year = new FormControl('', [Validators.required, Validators.maxLength(4)]),
+     username = new FormControl('', [Validators.required, Validators.maxLength(25)]),
      birthday = new FormGroup({
         day, month, year
         }),
-     email = new FormControl('',[Validators.required, Validators.pattern(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)]),
-     password = new FormControl('',[Validators.required, Validators.minLength(8)]),
-     confirmPassword = new FormControl('',[Validators.required])
+     email = new FormControl('', [Validators.required, Validators.pattern(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)]),
+     password = new FormControl('', [Validators.required, Validators.minLength(8)]),
+     confirmPassword = new FormControl('', [Validators.required]);
 this.loginForm = new FormGroup({
     gender,
     birthday,
@@ -82,12 +82,12 @@ this.loginForm = new FormGroup({
     username,
     password,
     confirmPassword
-})
+});
 }
-saveUser(usersInput){
-if(usersInput.confirmPassword === usersInput.password && this.loginForm.valid){
+saveUser(usersInput) {
+if (usersInput.confirmPassword === usersInput.password && this.loginForm.valid) {
     this.auth.saveNewUser(
         usersInput.username, usersInput.gender, usersInput.birthday, usersInput.email, usersInput.password
-    )}
+    ); }
     }
 }
