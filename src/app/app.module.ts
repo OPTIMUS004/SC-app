@@ -29,7 +29,8 @@ import { RouterModule } from '@angular/router';
 import { FooterComponent } from './sc-folder/footer.component';
 import { SharedModule } from 'src/common/shared.module';
 
-const jQuery = window.$;
+// tslint:disable-next-line: no-string-literal
+const jQuery = window['$'];
 
 @NgModule({
   declarations: [

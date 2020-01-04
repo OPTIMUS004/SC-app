@@ -11,7 +11,9 @@ export class AuthService {
   currentUser;
   msgBody: string;
   readonly baseURL = 'http://localhost:3000/users/';
+
   constructor(private http: HttpClient, private router: Router) { }
+
   getUsers() {
     // calculate age of each user and assign chapeone before subscription.
 
@@ -26,7 +28,8 @@ export class AuthService {
 
 
     });
-    return this.http.get(this.baseURL)
+    // Call to backend to get all registered users
+    /*return this.http.get(this.baseURL)
       .subscribe((usersInDataBase) => {
         const alternateUsersList = [usersInDataBase].slice(0);
         // tslint:disable-next-line: no-shadowed-variable
@@ -39,6 +42,7 @@ export class AuthService {
           return usersList;
         });
       });
+      */
 
 
     // Assign each user a chaperone
@@ -221,14 +225,11 @@ export class AuthService {
   msgchap() {
     const options = {
       headers: new HttpHeaders({
-        'Content-Type': 'applicstion/json',
+        'Content-Type': 'application/json',
         Accept: 'application/x-www-form-urlencoded'
       })
     };
-
-
     return this.http.post('http://www.formspree.io/macbrill13@gmail.com', this.msgBody, options);
-
   }
 
   isAuthenticated() {
