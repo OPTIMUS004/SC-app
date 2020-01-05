@@ -28,23 +28,6 @@ export class AuthService {
 
 
     });
-    // Call to backend to get all registered users
-    /*return this.http.get(this.baseURL)
-      .subscribe((usersInDataBase) => {
-        const alternateUsersList = [usersInDataBase].slice(0);
-        // tslint:disable-next-line: no-shadowed-variable
-        const presentYear = new Date().getFullYear();
-        console.log(alternateUsersList);
-        alternateUsersList.forEach(user => {
-          const userYear = user.birthday.year;
-          const userAge = presentYear - parseInt(userYear, 10);
-          user.age = userAge;
-          return usersList;
-        });
-      });
-      */
-
-
     // Assign each user a chaperone
     function mapUsers(user) {
       const randomNumber = Math.floor(Math.random() * this.length);
@@ -72,22 +55,6 @@ export class AuthService {
         this.currentUser = undefined;
       }
     });
-
-    /*    let userCredential = {"username": userName, "password": password }
-        return this.http.post(this.baseURL + 'login', userCredential)
-        .subscribe( userData => {
-          this.currentUser = userData;
-      if(this.isAuthenticated()){
-          this.router.navigate([`/user/${this.currentUser.username}`])
-
-      }else{
-
-          alert("Invalid username or Password")
-
-      }
-      return this.currentUser, this.isAuthenticated();
-    });
-       */
   }
 
   logout() {
