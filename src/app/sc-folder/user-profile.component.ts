@@ -12,27 +12,27 @@ import { requiredFileType } from './services/requiredFileType.validator';
 
 export class UserProfileComponent implements OnInit {
     userProfile;
-
+    progress: any;
     birthday: FormGroup;
     editForm: FormGroup;
-    private image: FormControl;
-    private firstname: FormControl;
-    private lastname: FormControl;
-    private aboutYou: FormControl;
-    private username: FormControl;
-    private day: FormControl;
-    private month: FormControl;
-    private year: FormControl;
-    private password: FormControl;
-    private height: FormControl;
-    private bodyType: FormControl;
-    private kids: FormControl;
-    private religionSect: FormControl;
-    private workStatus: FormControl;
-    private salary: FormControl;
-    private email: FormControl;
-    private eductionLevel: FormControl;
-    private gender: FormControl;
+    image: FormControl;
+    firstname: FormControl;
+    lastname: FormControl;
+    aboutYou: FormControl;
+    username: FormControl;
+    day: FormControl;
+    month: FormControl;
+    year: FormControl;
+    password: FormControl;
+    height: FormControl;
+    bodyType: FormControl;
+    kids: FormControl;
+    religionSect: FormControl;
+    workStatus: FormControl;
+    salary: FormControl;
+    email: FormControl;
+    eductionLevel: FormControl;
+    gender: FormControl;
     confirmPassword: FormControl;
     constructor( private auth: AuthService, private router: Router ) {}
     ngOnInit() {

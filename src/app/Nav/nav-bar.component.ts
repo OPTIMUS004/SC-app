@@ -72,9 +72,10 @@ export class NavBarComponent {
     user;
     userIsValid;
 
-    constructor(private router: Router, private auth: AuthService, @Inject(JQ_TOKEN) private $: any) {}
+    constructor(private router: Router, public auth: AuthService, @Inject(JQ_TOKEN) private $: any) {}
 
     ngOnInit() {
+        // tslint:disable-next-line: one-variable-per-declaration
         const userName = new FormControl('', [Validators.required]),
             password = new FormControl('', [Validators.required, Validators.minLength(8)]);
         this.loginForm = new FormGroup ({

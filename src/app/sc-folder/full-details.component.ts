@@ -83,7 +83,7 @@ export class FullDetailsComponent implements OnInit {
     age: any;
 
 
-    constructor(private auth: AuthService, private route: ActivatedRoute) {
+    constructor(public auth: AuthService, private route: ActivatedRoute) {
 
     }
     ngOnInit() {
