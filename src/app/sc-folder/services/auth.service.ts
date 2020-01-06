@@ -188,17 +188,6 @@ export class AuthService {
     }
 
   }
-
-  msgchap() {
-    const options = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        Accept: 'application/x-www-form-urlencoded'
-      })
-    };
-    return this.http.post('http://www.formspree.io/macbrill13@gmail.com', this.msgBody, options);
-  }
-
   isAuthenticated() {
 
     return !!this.currentUser;
