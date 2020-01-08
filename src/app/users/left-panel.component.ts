@@ -32,8 +32,7 @@ export class LeftPanelComponent {
 
     constructor( private auth: AuthService) {}
     msgChap() {
-
-        alert('Fancy noted')
-
+        this.auth.generateMsgForChap();
+        this.auth.msgchap();
     }
 }

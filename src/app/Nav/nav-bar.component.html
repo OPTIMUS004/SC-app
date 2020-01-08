@@ -1,4 +1,5 @@
-                <nav [ngClass]="{'style-bg': (auth.isAuthenticated())}">
+			<header>
+				<nav [ngClass]="{'style-bg': (auth.isAuthenticated())}">
                     <div class="navbar-brand">
                        <a (click)="toHomeOrDetailsPage()"> <img src="/assets/images/SCavatar.png" class="sc-logo" alt="SoulConnect" /></a>
                     </div>
@@ -20,6 +21,7 @@
 						</div>
                     </div>
 				</nav>
+			</header>
 				<simple-modal elementId="loginBlock" class="modalContainer">
 					<form [formGroup]="loginForm" autocomplete="off">
 						<div class="form-group">
