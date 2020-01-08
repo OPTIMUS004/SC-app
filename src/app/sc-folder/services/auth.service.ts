@@ -189,7 +189,7 @@ export class AuthService {
 
   }
   msgchap() {
-    console.log(this.msgBody);
+    
     const options = { headers: new HttpHeaders({'Content-Type': 'application/json'})};
     return this.http.post('http://www.formspree.com/macbrill13@gmail.com', this.msgBody, options)
     .subscribe();
