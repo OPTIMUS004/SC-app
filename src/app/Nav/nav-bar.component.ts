@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { AuthService } from '../sc-folder/services/auth.service';
 import { Router } from '@angular/router';
 import { JQ_TOKEN } from '../../common/jQuery.service';
@@ -67,7 +67,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
                 }
         `]
 })
-export class NavBarComponent {
+export class NavBarComponent implements OnInit {
     loginForm: FormGroup;
     user;
     userIsValid;
@@ -84,6 +84,7 @@ export class NavBarComponent {
         });
     }
     loginUser(loginDetails) {
+        this.loginForm.reset();
         this.auth.loginUser(loginDetails.userName, loginDetails.password);
 
 }
@@ -97,5 +98,8 @@ export class NavBarComponent {
         } else {
             this.router.navigate(['/soul-connect']);
         }
+    }
+    comingSoon() {
+        alert('This Feature is under construction');
     }
 }

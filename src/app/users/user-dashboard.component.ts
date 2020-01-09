@@ -60,6 +60,14 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
                 .btn, .form-control{
                     border-radius: 0;
                 }
+                @media only screen and (max-width: 700px) {
+                    .card{
+                        width: 200px;
+                    }
+                    #searchForm{
+                        display: none;
+                    }
+                }
         `],
         animations: [trigger ('fadeInOut', [
             state('void', style({opacity: 0
