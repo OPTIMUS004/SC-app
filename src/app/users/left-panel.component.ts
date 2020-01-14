@@ -5,7 +5,7 @@ import { AuthService } from '../sc-folder/services/auth.service';
 @Component({
 selector: 'left-panel',
 template: `
-<div class ="col-sm-2 content-three">
+<div class ="container content-three">
 <div class="fancy">
     <h5>Your Fancies</h5>
     <likes [@fadeInOut]></likes>

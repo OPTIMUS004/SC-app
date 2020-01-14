@@ -5,70 +5,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 
 @Component({
     templateUrl:  './user-dashboard.component.html',
-        styles: [`
-                .flex-container{
-                    display: flex;
-                    flex-direction:row;
-                }
-                .right-panel{
-                    background: #bbb;
-                }
-                .content-three{
-                    background-color: #bbb;
-                    padding-top: 20px;
-                }
-                .content-two{
-                    display: flex;
-                    justify-content: center;
-                    float:left;
-                    margin: 10px 15px;
-                    padding-top: 20px;
-                }
-                .logo{
-                    padding:0;
-                }
-                img{
-                    max-width: 80px;
-                    max-height: 90px;
-                }
-                .username{
-                    color: #17a2b8;
-                }
-                .user-sig{
-                    padding-top: 5px;
-                }
-                .holder{
-                    background: #eee;
-                }
-                .head-line{
-                    display: flex;
-                    flex-flow: row wrap;
-                    margin-top: 10px;
-                    background-color: #fff;
-                    justify-content: space-between;
-                    align-items: center;
-                }
-                .user-info{
-                    display: flex;
-                    flex-flow: row wrap;
-                    justify-content: center;
-                    align-items: center;
-                }
-                a:hover{
-                    cursor: pointer;
-                }
-                .btn, .form-control{
-                    border-radius: 0;
-                }
-                @media only screen and (max-width: 700px) {
-                    .card{
-                        width: 200px;
-                    }
-                    #searchForm{
-                        display: none;
-                    }
-                }
-        `],
+    styleUrls: ['./user-dashboard.component.css'],
         animations: [trigger ('fadeInOut', [
             state('void', style({opacity: 0
             })),

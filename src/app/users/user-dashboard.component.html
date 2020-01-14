@@ -24,7 +24,7 @@
                 </simple-modal>
             </div>
         </div>
-        <div class="" *ngFor="let user of filterUsers">
+        <div *ngFor="let user of filterUsers">
             <div class="row content-two" [@fadeInOut]>
                     <div class="card shadow">
                         <div class="user-info">
@@ -44,7 +44,7 @@
             </div>
         </div>
     </section>
-    <aside>
+    <aside class="dontShow">
     <left-panel></left-panel>
     </aside>
 </main>

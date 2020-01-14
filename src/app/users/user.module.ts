@@ -7,6 +7,8 @@ import {UserDashboardComponent} from './user-dashboard.component';
 import { RightPanelComponent } from './right-panel.component';
 import { SharedModule } from 'src/common/shared.module';
 import { LeftPanelComponent } from './left-panel.component';
+import { UserFancyComponent } from './user-fancy.component';
+
 
 @NgModule({
     imports: [
@@ -19,7 +21,8 @@ import { LeftPanelComponent } from './left-panel.component';
     declarations: [
         UserDashboardComponent,
         RightPanelComponent,
-        LeftPanelComponent
+        LeftPanelComponent,
+        UserFancyComponent
     ],
     providers: [],
 

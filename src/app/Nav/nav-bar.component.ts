@@ -65,6 +65,12 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
                     margin:0;
                     background-color: #aaa;
                 }
+                @media only screen and (min-width: 700px) {
+                    .dontShow{
+                        display: none;
+                    }
+                }
+
         `]
 })
 export class NavBarComponent implements OnInit {
@@ -93,6 +99,7 @@ export class NavBarComponent implements OnInit {
         this.router.navigate(['/soul-connect']);
     }
     toHomeOrDetailsPage() {
+        this.userIsValid = this.auth.isAuthenticated()
         if (this.userIsValid) {
             this.router.navigate([`/user/${this.auth.currentUser.username}`]);
         } else {
@@ -101,5 +108,14 @@ export class NavBarComponent implements OnInit {
     }
     comingSoon() {
         alert('This Feature is under construction');
+    }
+    myFanciesPage(){
+        this.userIsValid = this.auth.isAuthenticated()
+        if(this.userIsValid && (this.auth.currentUser.favorite.length)) {
+            this.router.navigate([`/user/contact-chap`]);
+        }else{
+            console.log(this.userIsValid);
+            alert('Select Fancies');
+        }
     }
 }

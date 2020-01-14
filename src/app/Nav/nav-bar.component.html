@@ -14,6 +14,11 @@
 								<a class="text-light"><strong>Inbox</strong></a>
 							</div>
 						</div>
+						<div class="navbar-nav mr-2 dontShow" *ngIf="auth.isAuthenticated()">
+							<div class="nav-item left">
+								<a class="text-light" (click)="myFanciesPage()"><strong>Fancies</strong></a>
+							</div>
+						</div>
 						<div class="navbar-nav ml-2" *ngIf="auth.isAuthenticated()">
 							<div class="nav-item left">
 								<a class="text-light" (click)="logout()" ><strong>Logout</strong></a>
