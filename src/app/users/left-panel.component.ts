@@ -33,6 +33,7 @@ export class LeftPanelComponent {
     constructor( private auth: AuthService) {}
     msgChap() {
         this.auth.generateMsgForChap();
-        this.auth.msgchap();
+        this.auth.msgchap()
+        .subscribe();
     }
 }

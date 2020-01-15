@@ -1,7 +1,7 @@
 import { Injectable, EventEmitter } from '@angular/core';
-import { HttpHeaders, HttpClient } from '@angular/common/http';
+import { HttpHeaders, HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError, tap } from 'rxjs/operators';
-import { Observable, of } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 
 @Injectable()
@@ -188,15 +188,29 @@ export class AuthService {
     }
 
   }
-  msgchap() {
+  msgchap(): Observable<any> {
     
     const options = { headers: new HttpHeaders({'Content-Type': 'application/json'})};
     return this.http.post('http://www.formspree.com/macbrill13@gmail.com', this.msgBody, options)
-    .subscribe();
+    .pipe(
+      tap( data => console.log('All: ' +  JSON.stringify(data))),
+      catchError (this.handleError)
+    )
+    
   }
   isAuthenticated() {
 
     return !!this.currentUser;
+  }
+  private handleError(err: HttpErrorResponse){
+    let errorMessage = '';
+    if (err.error instanceof ErrorEvent){
+      errorMessage = `An Error occured: ${err.error.message}`;
+    }else{
+      errorMessage = `Server retuned code: ${err.status}, error message is: ${err.message}`;
+    }
+    console.error(errorMessage)
+    return throwError(errorMessage);
   }
 
 }
