@@ -1,9 +1,9 @@
 <main class="flex-container bg-white mt-4" *ngIf="auth.isAuthenticated()">
     <aside>
-    <right-panel class="right-panel" [user]="user">
-    </right-panel>
-</aside>
-    <section class="col-sm-8 holder">
+        <right-panel class="right-panel" [user]="user">
+        </right-panel>
+    </aside>
+    <section class="col holder">
         <div class="container head-line">
             <div class="row left">    
                 <button class="mr-3 btn btn-success" (click)="usePreferenceToFilter()" >Use Preference</button>
@@ -45,7 +45,7 @@
         </div>
     </section>
     <aside class="dontShow">
-    <left-panel></left-panel>
+        <left-panel></left-panel>
     </aside>
 </main>
 <unauthorized *ngIf="!auth.isAuthenticated()"></unauthorized>
