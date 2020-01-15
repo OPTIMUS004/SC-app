@@ -14,7 +14,8 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
                 nav{
                     height: 65px;
                     line-height: 30px;
-                    background-color: #09095ea2;
+                    background-color: #a2;
+                    
                 }
                 ul{
                     list-style-type: none;

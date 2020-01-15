@@ -13,7 +13,7 @@ import { AuthService } from './sc-folder/services/auth.service';
   styles: [`
   .body-bg{
 
-	background-image: url('/assets/images/background.jpg');
+	background-image: url('/assets/images/bg-xl.png');
 	background-size: cover;
 	background-position: center;
 	margin: 0;
@@ -21,7 +21,13 @@ import { AuthService } from './sc-folder/services/auth.service';
 .style-bg{
 	background-image: url('/assets/images/scbackground.png');
 }
-
+@media only screen and (max-width: 500px) {
+	background-image: url('/assets/images/bg-small.png');
+}
+@media only screen and (max-width: 800px) {
+	background-image: url('/assets/images/bg-medium.png');
+}
+}
   		`]
 })
 export class SCAppComponent {
