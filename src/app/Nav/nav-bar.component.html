@@ -1,29 +1,28 @@
 			<header>
-				<nav [ngClass]="{'style-bg': (auth.isAuthenticated())}">
+				<nav [ngClass]="{'style-bg': (auth.isAuthenticated())}" class="navbar navbar-expand-lg">
                     <div class="navbar-brand">
                        <a (click)="toHomeOrDetailsPage()"> <img src="/assets/images/SCavatar.png" class="sc-logo" alt="SoulConnect" /></a>
-                    </div>
-                    <div class="navbar">
-                        <div class="navbar-nav" *ngIf="!auth.isAuthenticated()">
-                            <div class="nav-item left">
-                                <a class="text-light" modal-trigger="loginBlock"><strong>Login</strong></a>
-							</div>
-						</div>
-						<div class="navbar-nav mr-2" *ngIf="auth.isAuthenticated()">
-							<div class="nav-item left">
-								<a class="text-light"><strong>Inbox</strong></a>
-							</div>
-						</div>
-						<div class="navbar-nav mr-2 dontShow" *ngIf="auth.isAuthenticated()">
-							<div class="nav-item left">
-								<a class="text-light" (click)="myFanciesPage()"><strong>Fancies</strong></a>
-							</div>
-						</div>
-						<div class="navbar-nav ml-2" *ngIf="auth.isAuthenticated()">
-							<div class="nav-item left">
-								<a class="text-light" (click)="logout()" ><strong>Logout</strong></a>
-							</div>
-						</div>
+					</div>
+					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>					
+                    <div class="collapse navbar-collapse navlinksstyle"  id="navbarSupportedContent">
+						<ul class ="navbar-nav mr-auto">
+							<li class="nav-item dontShow" *ngIf="auth.isAuthenticated()">
+								<a class="nav-link text-light" (click)="myFanciesPage()"><strong>Fancies</strong></a>
+							</li>
+							<li class="nav-item" *ngIf="auth.isAuthenticated()">
+								<a class="nav-link text-light" (click)="comingSoon()"><strong>Inbox</strong></a>
+							</li>
+						</ul>
+						<ul class ="navbar-nav pl-4">
+							<li class="nav-item" *ngIf="!auth.isAuthenticated()">
+								<a class="nav-link text-light" modal-trigger="loginBlock"><strong>Login</strong></a>
+							</li>
+							<li class="nav-item" *ngIf="auth.isAuthenticated()">
+								<a class="nav-link text-light" (click)="logout()" ><strong>Logout</strong></a>
+							</li>	
+						</ul>
                     </div>
 				</nav>
 			</header>

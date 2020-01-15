@@ -26,7 +26,7 @@ import { JQ_TOKEN } from './jQuery.service';
 	styles: [` .modal-header{ border-radius: 0; }
 				.modal-footer{ border-radius: 0; }
 				.modal{
-					margin-top: 150px;
+					padding-top: 100px;
 				}
 			`]
 	})

@@ -12,64 +12,23 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
                     margin: 0 30px 0 30px;
                 }
                 nav{
-                    height: 65px;
-                    line-height: 30px;
                     background-color: #a2;
-                    
                 }
-                ul{
-                    list-style-type: none;
-                }
-                .navbar{
-                    float: right;
-                    padding-right: 20px;
-                }
-                .sc-logo{
-                    float: left;
-                    padding-left: 20px;
-                }
-                a{
-                    text-decoration: none;
-                    transition: 0.8s;
-                }
-                a:hover{
+                .navbar-toggler{
+                    background: grey;
                     color: #fff;
-                    opacity: 0.9;
-                    transform: scale(0.5);
-                    cursor:pointer;
+                    outline: none;
                 }
-                .comment-one{
-                    float: left;
-                    display: inline-block;
-                }
-                .comment-two{
-                    float: right;
-                }
-                .btn-primary{
-                    background-color: green;
-                    border-radius: 0;
-                    border: 0;
-                }
-                .btn-default{
-                    background-color: red;
-                    border-radius: 0;
-                    color: white;
-                }
-                .btn:hover{
-                    width:;
-                    font-size: 14px;
-                    opacity: 0.7;
-                }
-                .empty-span{
-                    width: 100%;
-                    height: 50px;
-                    margin:0;
-                    background-color: #aaa;
-                }
+                
                 @media only screen and (min-width: 700px) {
                     .dontShow{
                         display: none;
                     }
+                }
+                @media only screen and (max-width: 600px){
+                    .navlinksstyle{
+                        background: #111;
+                    }   
                 }
 
         `]
