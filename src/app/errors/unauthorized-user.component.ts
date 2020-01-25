@@ -6,7 +6,7 @@
   template: `
     <div class="bg-white text-center">
       <h1 class="errorMessage">Unauthorized Access.</h1>
-      <h4><a class="text-blue" (click)="home()" >Login</a> to continue</h4>
+      <h4><a class="text-blue" (click)="home()"><span class="log">Login</span></a> to continue</h4>
     </div>
   `,
   styles: [`
@@ -22,6 +22,14 @@
           padding-bottom: 15px;
           margin-right: 50px;
           margin-left: 50px;
+          margin-bottom: 50px;
+        }
+        .log{
+          color: lightblue;
+          cursor: pointer;
+        }
+        @media only screen and (max-width: 600px){
+          .errorMessage{ font-size: 30px; }
         }
   	`]
   })

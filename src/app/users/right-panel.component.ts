@@ -11,6 +11,7 @@ import { AuthService } from '../sc-folder/services/auth.service';
                     padding-left: 4px;
                     padding-right: 4px;
                     margin-bottom: 7px;
+
                 }
                 .entire-collapsible{
                     margin-top:0;
@@ -39,6 +40,8 @@ import { AuthService } from '../sc-folder/services/auth.service';
                 .content-one{
                     background-color: #bbb;
                     padding-top: 20px;
+                    box-shadow: 0 10px 14px -7px #111;
+                    height: 100%;
                 }
                 a:hover{
                     cursor: pointer;

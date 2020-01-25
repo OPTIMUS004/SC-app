@@ -3,6 +3,7 @@ import { HttpHeaders, HttpClient, HttpErrorResponse } from '@angular/common/http
 import { catchError, tap } from 'rxjs/operators';
 import { Observable, of, throwError } from 'rxjs';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable()
 
@@ -12,7 +13,9 @@ export class AuthService {
   msgBody: string;
   readonly baseURL = 'http://localhost:3000/users/';
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, 
+              private router: Router,
+              private toastr: ToastrService) { }
 
   getUsers() {
     // calculate age of each user and assign chapeone before subscription.
@@ -43,16 +46,14 @@ export class AuthService {
     return users.find(user => user.username === name);
   }
   loginUser(userName: string, password: string) {
-
-
     // tslint:disable-next-line: no-use-before-declare
-    users.some((user) => {
+    return users.some((user) => {
       if (user.username === userName && user.password === password) {
         this.currentUser = user;
-        this.router.navigate([`/user/${this.currentUser.username}`]);
         return this.currentUser;
       } else {
-        this.currentUser = undefined;
+
+        return this.currentUser = undefined;
       }
     });
   }
@@ -89,7 +90,7 @@ export class AuthService {
     // this.http.post(this.baseURL, newUser).subscribe()
     // tslint:disable-next-line: no-use-before-declare
     users.push(newUser);
-    this.loginUser(newUser.username, newUser.password);
+    return this.loginUser(newUser.username, newUser.password);
 
 
   }
@@ -168,9 +169,9 @@ export class AuthService {
     if (this.currentUser.favorite.length === 'undefined'
       || this.currentUser.favorite.length === 'null'
       || this.currentUser.favorite.length === 0) {
-      alert('Select fancies');
+        this.toastr.warning("Select fancies");
     } else if ((this.currentUser.favorite.length > 2)) {
-      alert('You can only pick two fancies');
+      this.toastr.warning('You can only pick two fancies');
     } else {
 
       fancyOne = this.currentUser.favorite[0].username;

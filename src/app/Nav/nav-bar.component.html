@@ -1,7 +1,7 @@
 			<header>
-				<nav [ngClass]="{'style-bg': (auth.isAuthenticated())}" class="navbar navbar-expand-lg">
-                    <div class="navbar-brand">
-                       <a (click)="toHomeOrDetailsPage()"> <img src="/assets/images/SCavatar.png" class="sc-logo" alt="SoulConnect" /></a>
+				<nav class="navbar navbar-expand-lg navbar-dark">
+          <div class="navbar-brand">
+            <a (click)="toHomeOrDetailsPage()"> <img src="/assets/images/SCavatar.png" class="sc-logo" alt="SoulConnect" /></a>
 					</div>
 					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 						<span class="navbar-toggler-icon"></span>
@@ -29,12 +29,12 @@
 				<simple-modal elementId="loginBlock" class="modalContainer">
 					<form [formGroup]="loginForm" autocomplete="off">
 						<div class="form-group">
-							<input class="form-control" formControlName="userName" type='text' placeholder="Username..." />
 							<i class="fa fa-user"></i>
+							<input class="form-control" formControlName="userName" type='text' placeholder="Username..." />
 						</div>
 						<div class="form-group">
-							<input formControlName="password" class="form-control" type='password' class="form-control" placeholder="Password..." />
 							<i class="fa fa-password"></i>
+							<input formControlName="password" class="form-control col-md-2" type='password' class="form-control" placeholder="Password..." />
 						</div>
 						<button (click)="loginUser(loginForm.value)" class="btn btn-primary shadow comment-one" data-dismiss="modal" type="submit">Login</button>
 						<button class="btn btn-default shadow comment-two" type="button" data-dismiss="modal">Cancel</button>
