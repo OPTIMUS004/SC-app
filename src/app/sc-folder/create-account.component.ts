@@ -17,7 +17,7 @@ import { ToastrService } from 'ngx-toastr';
 	.error :ms-input-placeholder, .error: ms-select { color: #999;}
     .btn{
         background-color: #fff;
-        width:40%;
+        width:45%;
         height: 40px;
         border: 0;
         border-radius: 6px;
@@ -50,7 +50,7 @@ import { ToastrService } from 'ngx-toastr';
         width:100%;
         border-bottom: 3px solid darkred;
     }
-    input[type=text], [type=number], [type=password], select{
+    input[type=text], [type=number], [type=password], select, .e-date-wrapper{
         border: 0;
         height: 45px;
         border-radius: 6px;
@@ -61,6 +61,12 @@ import { ToastrService } from 'ngx-toastr';
         family-family: cursive;
         text-decoration: none;
         outline: none;
+
+    }
+    .e-date-wrapper{
+        background: #fff;
+        font-family: cursive;
+        font-size: 16px;
     }
     .form-group{
         margin-bottom: 15px;
@@ -78,7 +84,7 @@ import { ToastrService } from 'ngx-toastr';
 export class CreateAccountComponent {
     loginForm: FormGroup;
     minDate: Date = new Date("05/07/1990");
-    value: Date = new Date('05/07/2002');
+    value: Date = new Date("05/07/2000");
     
 
     constructor(
@@ -89,40 +95,34 @@ export class CreateAccountComponent {
     }
 ngOnInit() {
 const gender = new FormControl('', [Validators.required]),
-     day = new FormControl('', [Validators.required, Validators.maxLength(2)]),
-     month = new FormControl('', [Validators.required, Validators.maxLength(2)]),
-     year = new FormControl('', [Validators.required, Validators.maxLength(4)]),
+    
      username = new FormControl('', [Validators.required, Validators.maxLength(25)]),
-     dob = new FormControl(),
-     birthday = new FormGroup({
-        day, month, year
-        }),
+     dob = new FormControl('12/10/1992'),
+     firstname = new FormControl(''),
+     lastname = new FormControl(''),
      email = new FormControl('', [Validators.required, Validators.pattern(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)]),
      password = new FormControl('', [Validators.required, Validators.minLength(8)]),
      confirmPassword = new FormControl('', [Validators.required]);
 this.loginForm = new FormGroup({
     gender,
-    birthday,
     email,
     username,
     password,
+    firstname,
+    lastname,
     dob,
     confirmPassword
 });
 }
 saveUser(usersInput) {
 if (usersInput.confirmPassword === usersInput.password && this.loginForm.valid) {
-    
-    const newbee = this.auth.saveNewUser(
-        usersInput.username, usersInput.gender, usersInput.birthday, usersInput.email, usersInput.password
-
-    );
+    const newbee = this.auth.saveNewUser(usersInput);
     if (newbee){
         this.toastr.success("Account created successfully");
         this.router.navigate([`/user/${this.auth.currentUser.username}`]);
     }
 }else{
-    this.toastr.error("password mismatch!");
+    this.toastr.error("Invalid form!");
 }
     }
 }

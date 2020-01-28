@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
-import { CalendarModule } from '@syncfusion/ej2-angular-calendars';
+import { DatePickerModule } from '@syncfusion/ej2-angular-calendars';
 import { HttpClientModule } from '@angular/common/http';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
@@ -50,7 +50,7 @@ const jQuery = window['$'];
   ],
   imports: [
     BrowserModule,
-    CalendarModule,
+    DatePickerModule,
     ToastrModule.forRoot({ closeButton: true }),
     RouterModule.forRoot(appRoutes),
     BrowserAnimationsModule,

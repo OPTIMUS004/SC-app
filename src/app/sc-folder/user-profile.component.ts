@@ -13,16 +13,13 @@ import { requiredFileType } from './services/requiredFileType.validator';
 export class UserProfileComponent implements OnInit {
     userProfile;
     progress: any;
-    birthday: FormGroup;
+    
     editForm: FormGroup;
     image: FormControl;
     firstname: FormControl;
     lastname: FormControl;
     aboutYou: FormControl;
     username: FormControl;
-    day: FormControl;
-    month: FormControl;
-    year: FormControl;
     password: FormControl;
     height: FormControl;
     bodyType: FormControl;
@@ -34,6 +31,7 @@ export class UserProfileComponent implements OnInit {
     eductionLevel: FormControl;
     gender: FormControl;
     confirmPassword: FormControl;
+    rStatus: FormControl;
     constructor( private auth: AuthService, private router: Router ) {}
     ngOnInit() {
         this.userProfile = this.auth.currentUser;
@@ -46,17 +44,10 @@ export class UserProfileComponent implements OnInit {
         this.bodyType = new FormControl(this.userProfile.bodyType, Validators.required);
         this.kids = new FormControl(this.userProfile.kids, Validators.required);
         this.religionSect = new FormControl(this.userProfile.religionSect, Validators.required);
-        this.day  = new FormControl({value: this.userProfile.birthday.day, disabled: true}, Validators.required);
-        this.month = new FormControl({value: this.userProfile.birthday.month, disabled: true}, Validators.required);
-        this.year = new FormControl({value: this.userProfile.birthday.year, disabled: true}, Validators.required);
-        this.birthday = new FormGroup({
-            day: this.day,
-            month: this.month,
-            year: this.year,
-        });
         this.confirmPassword = new FormControl(this.userProfile.password, Validators.required);
         this.workStatus = new FormControl(this.userProfile.workStatus, Validators.required);
         this.salary = new FormControl(this.userProfile.salary, Validators.required);
+        this.rStatus = new FormControl(this.userProfile.rStatus, Validators.required);
         this.email = new FormControl(this.userProfile.email, Validators.required);
         this.eductionLevel = new FormControl(this.userProfile.educationLevel, Validators.required);
         this.gender = new FormControl({value: this.userProfile.gender, disabled: true}, Validators.required);
@@ -64,7 +55,7 @@ export class UserProfileComponent implements OnInit {
 
         this.editForm = new FormGroup({
             firstname: this.firstname  ,
-            lastname: this.lastname ,
+            lastname: this.lastname,
             aboutYou: this.aboutYou,
             username: this.username,
             password: this.password,
@@ -73,24 +64,23 @@ export class UserProfileComponent implements OnInit {
             bodyType: this.bodyType,
             kids: this.kids,
             religionSect: this.religionSect,
-            birthday: this.birthday,
             workStatus: this.workStatus,
             salary: this.salary,
             email: this.email,
+            rStatus: this.rStatus,
             eductionLevel: this.eductionLevel,
             gender: this.gender,
             confirmPassword: this.confirmPassword
-
         });
     }
     cancel() {
-        this.router.navigate([`./soul-connect/${this.userProfile.username}`]);
+        this.router.navigate([`/user/${this.userProfile.username}`]);
     }
     saveEditedProfile(formValue) {
 
        if (formValue.password === formValue.confirmPassword) {
            this.auth.EditProfile(formValue);
-           this.router.navigate([`./soul-connect/${this.userProfile.username}`]);
+           this.router.navigate([`/user/${this.userProfile.username}`]);
        }
     }
 }

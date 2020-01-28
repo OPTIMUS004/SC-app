@@ -24,13 +24,15 @@ export class AuthService {
     const usersList = users.slice(0);
     const presentYear = new Date().getFullYear();
     usersList.forEach(user => {
-      const userYear = user.birthday.year;
-      const userAge = presentYear - parseInt(userYear, 10);
-      user.age = userAge;
-      return usersList;
+      if(user.age===0){
+        const userYear = user.dob.split('/')[2]
+        const userAge = presentYear - parseInt(userYear, 10);
+        user.age = userAge;
+        return user;
+      }
+      return usersList
 
-
-    });
+    })
     // Assign each user a chaperone
     function mapUsers(user) {
       const randomNumber = Math.floor(Math.random() * this.length);
@@ -50,9 +52,10 @@ export class AuthService {
     return users.some((user) => {
       if (user.username === userName && user.password === password) {
         this.currentUser = user;
+        this.isAuthenticated();
+        console.log(this.isAuthenticated());
         return this.currentUser;
       } else {
-
         return this.currentUser = undefined;
       }
     });
@@ -61,37 +64,45 @@ export class AuthService {
   logout() {
     this.currentUser = undefined;
   }
-  saveNewUser(username, gender, birthday, email, password) {
-    const newUser = {
-      firstname: '',
-      lastname: '',
-      age: 0,
-    preference: '',
-    image: '',
-      favorite: [],
-      proposes: [''],
-      username,
-      password,
-      gender,
-      birthday,
-      email,
-      height: '',
-      bodyType: '',
-      rStatus: '',
-      kids: '',
-      educationLevel: '',
-      ethnicity: '',
-      religionSect: '',
-      workStatus: { employed: false, occupation: '' },
-      salary: '',
-      aboutYou: '',
-      chaperone: ''
+
+  saveNewUser(userInput) {
+    
+    const newUser= {
+            firstname: userInput.firstname,
+            lastname: userInput.lastname,
+            username: userInput.username,
+            password: userInput.password,
+            gender: userInput.gender,
+            dob: userInput.dob,
+            age: 0,
+            preference: '',
+            image: '',
+            email: userInput.email,
+            height: '',
+            bodyType: '',
+            rStatus: 'single',
+            kids: '',
+            educationLevel: '',
+            ethnicity: '',
+            religionSect: 'none',
+            workStatus: { employed: true, occupation: 'teacher' },
+            salary: '10000',
+            favorite: [''],
+            proposes: [''],
+            aboutYou: ''
     };
+    const presentYear = new Date().getFullYear();
+
+    if(newUser.age===0){
+      const userYear = newUser.dob.split('/')[2]
+      const userAge = presentYear - parseInt(userYear, 10);
+      newUser.age = userAge;
+    }
     // this.http.post(this.baseURL, newUser).subscribe()
     // tslint:disable-next-line: no-use-before-declare
     users.push(newUser);
+    console.log(users);
     return this.loginUser(newUser.username, newUser.password);
-
 
   }
   EditProfile(editedProfile) {
@@ -225,7 +236,7 @@ const users = [
     username: 'integral',
     password: '12345678',
     gender: 'male',
-    birthday: { day: '12', month: '12', year: '2004' },
+    dob: '12/10/1990',
     age: 0,
     preference: '',
     image: '',
@@ -252,7 +263,7 @@ const users = [
     age: 0,
     preference: '',
     image: '',
-    birthday: { day: '12', month: '12', year: '2004' },
+    dob: '12/10/1990',
     email: 'tayoola13@yahoo.com',
     height: '1.4',
     bodyType: '',
@@ -273,10 +284,10 @@ const users = [
     username: 'Dibu',
     password: '12345678',
     gender: 'male',
-    birthday: { day: '12', month: '12', year: '2004' },
     email: 'tayoola13@yahoo.com',
     height: '1.4',
     bodyType: '',
+    dob: '12/10/1990',
     age: 0,
     preference: '',
     image: '',
@@ -297,7 +308,7 @@ const users = [
     username: 'bold',
     password: '12345678',
     gender: 'male',
-    birthday: { day: '12', month: '12', year: '2004' },
+    dob: '12/10/1990',
     email: 'tayoola13@yahoo.com',
     favorite: [''],
     proposes: [''],
@@ -321,7 +332,7 @@ const users = [
     username: 'kennyket',
     password: '12345678',
     gender: 'female',
-    birthday: { day: '12', month: '12', year: '1996' },
+    dob: '12/10/1990',
     email: 'tayoola13@yahoo.com',
     height: '1.4',
     favorite: [''],
@@ -345,7 +356,7 @@ const users = [
     username: 'SlayQ',
     password: '12345678',
     gender: 'female',
-    birthday: { day: 2 + 2, month: '12', year: '1994' },
+    dob: '12/10/1990',
     email: 'tayoola13@yahoo.com',
     height: '1.4',
     bodyType: '',
@@ -369,7 +380,7 @@ const users = [
     username: 'Jeff',
     password: '12345678',
     gender: 'female',
-    birthday: { day: 2 + 2, month: '12', year: '1990' },
+    dob: '12/10/1990',
     email: 'tayoola13@yahoo.com',
     height: '1.4',
     bodyType: '',
@@ -393,7 +404,7 @@ const users = [
     username: 'Georgia',
     password: '12345678',
     gender: 'female',
-    birthday: { day: 2 + 2, month: '12', year: '2001' },
+    dob: '12/10/1990',
     email: 'tayoola13@yahoo.com',
     height: '1.4',
     bodyType: '',
@@ -417,7 +428,7 @@ const users = [
     username: 'Mississippi',
     password: '12345678',
     gender: 'female',
-    birthday: { day: 2 + 2, month: '12', year: '1980' },
+    dob: '12/10/1990',
     email: 'tayoola13@yahoo.com',
     height: '1.4',
     bodyType: '',
@@ -441,7 +452,7 @@ const users = [
     username: 'Tilda',
     password: '12345678',
     gender: 'female',
-    birthday: { day: 2 + 2, month: '12', year: '2004' },
+    dob: '12/10/1990',
     email: 'tayoola13@yahoo.com',
     height: '1.4',
     age: 0,
@@ -465,7 +476,7 @@ const users = [
     username: 'Jordy',
     password: '12345678',
     gender: 'female',
-    birthday: { day: 2 + 2, month: '12', year: '2004' },
+    dob: '12/10/1990',
     email: 'tayoola13@yahoo.com',
     height: '1.4',
     bodyType: '',
@@ -489,7 +500,7 @@ const users = [
     username: 'baoku',
     password: '12345678',
     gender: 'female',
-    birthday: { day: 2 + 2, month: '12', year: '2004' },
+    dob: '12/10/1990',
     email: 'tayoola13@yahoo.com',
     height: '1.4',
     age: 0,
@@ -513,7 +524,7 @@ const users = [
     username: 'Founder',
     password: '12345678',
     gender: 'female',
-    birthday: { day: 2 + 2, month: '12', year: '2004' },
+    dob: '12/10/1990',
     email: 'tayoola13@yahoo.com',
     height: '1.4',
     bodyType: '',

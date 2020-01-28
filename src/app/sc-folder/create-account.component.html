@@ -5,7 +5,7 @@
 <form [formGroup]="loginForm" (ngSubmit)="saveUser(loginForm.value)">
 
     <div class="form-group">
-    <label for="preference">I'm a:</label>
+    <label for="preference">I'm a <i class="fa fa-venus-mars"></i>:</label>
     <em *ngIf="loginForm.controls.gender?.invalid && loginForm.controls.gender?.touched">Required</em>
     <br/>
     <select class="form-control" formControlName = "gender" class="preference" required> 
@@ -14,28 +14,12 @@
         <option value="female">Woman,interested in Men</option>
     </select>
     </div>
-  <!----
-    <div class="form-group">
-        <ejs-calendar id="calendar" formControlName = "dob" [value]='value' [min]='minDate'></ejs-calendar>
+    
+    <div class="form-group" [ngClass]="{'error': (loginForm.controls.dob?.invalid && loginForm.controls.dob?.touched)}">
+        <label for="">Birthday <i class="fas fa-calendar-minus"></i>:</label>
+        <em *ngIf="loginForm.controls.dob?.invalid && loginForm.controls.dob?.touched">Required</em>
+        <ejs-datepicker id="calendar" formControlName = "dob" [value]='value' [min]='minDate' placeholder="mm/dd/yyyy"></ejs-datepicker>
     </div> 
--->
-
-    <div class="form-group">
-        <label for="">Birthday:</label>
-        <em *ngIf="loginForm.controls.birthday.invalid && loginForm.controls.birthday?.touched">Required</em>
-        <br/>
-        <div formGroupName="birthday" class="flex-container">
-            <div [ngClass]="{'error': (loginForm.controls.day?.invalid && loginForm.controls.day?.touched)}"> 
-                <input type="number" maxLength="2" class="form-control" formControlName = "day" placeholder="dd" id="day" required />
-            </div>
-            <div [ngClass]="{'error': (loginForm.controls.month?.invalid && loginForm.controls.month?.touched)}"> 
-                <input type="number" class="form-control" formControlName="month" placeholder="mm" id="month" required />
-            </div>
-            <div [ngClass]="{'error': (loginForm.controls.year?.invalid && loginForm.controls.year?.touched)}"> 
-                <input type="number" class="form-control" formControlName="year" placeholder="yyyy" id="year" required />
-            </div>
-        </div>
-    </div>
 
     <div class="form-group" [ngClass]="{'error': (loginForm.controls.email.invalid && loginForm.controls.email?.touched)}">
         <label for="email">Email Address</label>
@@ -51,7 +35,6 @@
         <input name="username" type="text" formControlName="username" placeholder="Username" id="username" required />
     </div>
 
-
     <div class="form-group" [ngClass]="{'error': (loginForm.controls.password?.invalid && loginForm.controls.password?.touched)}">
         <label for="password">Password</label>
         <em *ngIf="loginForm.controls.password?.invalid && loginForm.controls.password?.touched">Cannot be less than eight characters</em>
@@ -65,6 +48,21 @@
         <br/>
         <input name="confirmPassword" type="password" formControlName="confirmPassword" placeholder="confirm password" id="cpassword" required />
     </div>    
+
+    <div class="form-group">
+        <div class="flex-container">
+            <div [ngClass]="{'error': (loginForm.controls.day?.invalid && loginForm.controls.firstname?.touched)}"> 
+                <label for="firstname">Firstname:</label>
+                <em *ngIf="loginForm.controls.firstname?.invalid && loginForm.controls.firstname?.touched">Required</em>
+                <input type="text" maxLength="20" class="form-control" formControlName = "firstname" placeholder="firstname" id="day" required />
+            </div>
+            <div [ngClass]="{'error': (loginForm.controls.lastname?.invalid && loginForm.controls.lastname?.touched)}"> 
+                <label for="lastname">Lastname:</label>
+                <em *ngIf="loginForm.controls.lastname?.invalid && loginForm.controls.lastname?.touched">Required</em>
+                <input type="text" maxLength="20" class="form-control" formControlName = "lastname" placeholder="lastname" required />
+            </div>
+        </div>
+    </div>
 
     <button type="submit" class="btn btn-submit">Sign Up</button>
 </form>
