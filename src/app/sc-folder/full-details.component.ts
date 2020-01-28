@@ -92,7 +92,7 @@ export class FullDetailsComponent implements OnInit {
         this.viewFemale = this.auth.getId(this.route.snapshot.params.name);
 
         const thisYear = this.date.getFullYear();
-        const usersYear = this.viewFemale.birthday.year;
+        const usersYear = this.viewFemale.dob.split('/')[2]
         this.age = thisYear - parseInt( usersYear, 10);
     }
 

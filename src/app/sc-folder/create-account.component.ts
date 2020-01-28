@@ -119,7 +119,7 @@ if (usersInput.confirmPassword === usersInput.password && this.loginForm.valid) 
     const newbee = this.auth.saveNewUser(usersInput);
     if (newbee){
         this.toastr.success("Account created successfully");
-        this.router.navigate([`/user/${this.auth.currentUser.username}`]);
+        this.router.navigate([`/soul-connect/users${this.auth.currentUser.username}`]);
     }
 }else{
     this.toastr.error("Invalid form!");
