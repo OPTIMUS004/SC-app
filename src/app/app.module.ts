@@ -30,6 +30,7 @@ import { CacheInterceptor } from './sc-folder/services/cache.intercptor';
 import { RouterModule } from '@angular/router';
 import { FooterComponent } from './sc-folder/footer.component';
 import { SharedModule } from 'src/common/shared.module';
+import { ChatsComponent } from './chats/chats.component';
 
 // tslint:disable-next-line: no-string-literal
 const jQuery = window['$'];
@@ -45,7 +46,8 @@ const jQuery = window['$'];
     UploadProgressComponent,
     ScHomepageComponent,
     Error404Component,
-    FooterComponent
+    FooterComponent,
+    ChatsComponent
 
   ],
   imports: [

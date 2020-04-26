@@ -12,7 +12,7 @@
 								<a class="nav-link text-light" (click)="myFanciesPage()"><strong>Fancies</strong></a>
 							</li>
 							<li class="nav-item" *ngIf="auth.isAuthenticated()" data-toggle="collapse" data-target="#navbarSupportedContent">
-								<a class="nav-link text-light" (click)="comingSoon()"><strong>Inbox</strong></a>
+								<a class="nav-link text-light" (click)="comingSoon()"><strong>Chatroom</strong></a>
 							</li>
 						</ul>
 						<ul class ="navbar-nav pl-4">
@@ -37,7 +37,7 @@
 							<input formControlName="password" class="form-control col-md-2" type='password' class="form-control" placeholder="Password..." />
 						</div>
 						<button (click)="loginUser(loginForm.value)" class="btn btn-primary shadow comment-one" data-dismiss="modal" type="submit">Login</button>
-						<button class="btn btn-default shadow comment-two" type="button" data-dismiss="modal">Cancel</button>
+						<button (click)="cancelSignIn()" class="btn btn-default shadow comment-two" type="button" data-dismiss="modal">Cancel</button>
 					</form>
 					<span class="bg-dark empty-span"></span>
 				</simple-modal>

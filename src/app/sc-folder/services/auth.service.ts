@@ -11,37 +11,20 @@ export class AuthService {
 
   currentUser;
   msgBody: string;
-  readonly baseURL = 'http://localhost:3000/users/';
+  readonly baseURL = 'http://localhost:4000/api/users/';
 
   constructor(private http: HttpClient, 
-              private router: Router,
               private toastr: ToastrService) { }
 
   getUsers() {
     // calculate age of each user and assign chapeone before subscription.
 
     // tslint:disable-next-line: no-use-before-declare
-    const usersList = users.slice(0);
-    const presentYear = new Date().getFullYear();
-    usersList.forEach(user => {
-      if(user.age===0){
-        const userYear = user.dob.split('/')[2]
-        const userAge = presentYear - parseInt(userYear, 10);
-        user.age = userAge;
-        return user;
-      }
-      return usersList
-
-    })
-    // Assign each user a chaperone
-    function mapUsers(user) {
-      const randomNumber = Math.floor(Math.random() * this.length);
-      user.chap = this[randomNumber];
-      return { user };
-    }
-    // tslint:disable-next-line: no-use-before-declare
-    usersList.map(mapUsers, chaperones);
-    return usersList;
+    return this.http.get(this.baseURL)
+    .pipe(
+      tap(data=> console.log('All: ' + JSON.stringify(data))),
+      catchError(this.handleError)
+    )
   }
   getId(name) {
     // tslint:disable-next-line: no-use-before-declare
@@ -49,16 +32,9 @@ export class AuthService {
   }
   loginUser(userName: string, password: string) {
     // tslint:disable-next-line: no-use-before-declare
-    return users.some((user) => {
-      if (user.username === userName && user.password === password) {
-        this.currentUser = user;
-        this.isAuthenticated();
-        console.log(this.isAuthenticated());
-        return this.currentUser;
-      } else {
-        return this.currentUser = undefined;
-      }
-    });
+    const credOfUser = { username: userName, password: password}
+    return this.http.post('http://localhost:4000/api/login/', credOfUser)
+    
   }
 
   logout() {
@@ -66,7 +42,11 @@ export class AuthService {
   }
 
   saveNewUser(userInput) {
-    
+    const currentYear = new Date().getFullYear();
+        const userYear = new Date(userInput.dob).getFullYear();
+        console.log(new Date(userYear).getFullYear());
+        const userAge = currentYear - userYear;
+
     const newUser= {
             firstname: userInput.firstname,
             lastname: userInput.lastname,
@@ -74,36 +54,28 @@ export class AuthService {
             password: userInput.password,
             gender: userInput.gender,
             dob: userInput.dob,
-            age: 0,
-            preference: '',
             image: '',
             email: userInput.email,
             height: '',
+            weight: '',
             bodyType: '',
+            age: userAge,
+            preference: '',
             rStatus: 'single',
+            genotype: '',
+            bloodGroup: '',
             kids: '',
             educationLevel: '',
             ethnicity: '',
-            religionSect: 'none',
-            workStatus: { employed: true, occupation: 'teacher' },
-            salary: '10000',
+            sect: '',
+            workStatus: { employed: true, occupation: '' },
             favorite: [''],
-            proposes: [''],
-            aboutYou: ''
+            proposals: [''],
+            aboutYou: '',
+            expectancy: '',
+            outlook: ''
     };
-    const presentYear = new Date().getFullYear();
-
-    if(newUser.age===0){
-      const userYear = newUser.dob.split('/')[2]
-      const userAge = presentYear - parseInt(userYear, 10);
-      newUser.age = userAge;
-    }
-    // this.http.post(this.baseURL, newUser).subscribe()
-    // tslint:disable-next-line: no-use-before-declare
-    users.push(newUser);
-    console.log(users);
-    return this.loginUser(newUser.username, newUser.password);
-
+    return this.http.post(this.baseURL, newUser).subscribe()
   }
   EditProfile(editedProfile) {
     // tslint:disable-next-line: no-use-before-declare
@@ -221,10 +193,13 @@ export class AuthService {
     if (err.error instanceof ErrorEvent){
       errorMessage = `An Error occured: ${err.error.message}`;
     }else{
-      errorMessage = `Server retuned code: ${err.status}, error message is: ${err.message}`;
+      errorMessage = `Server returned code: ${err.status}, error message is: ${err.message}`;
     }
     console.error(errorMessage)
     return throwError(errorMessage);
+  }
+  getChaperones() {
+    return chaperones
   }
 
 }

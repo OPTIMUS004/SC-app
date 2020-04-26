@@ -1,0 +1,16 @@
+
+<div class="container">
+    <div class="cardboard">
+        <div class="chat-box" *ngFor="let message of messages" 
+            [ngStyle]="setSenderStyle(message)" >
+            <div>
+            <span class="small-size">{{message.user | titlecase }}</span><br />
+                {{message.message}} <span class="small-size timeStampStyle">{{message.dateStamp}}</span>
+            </div>
+        </div>
+    </div>
+    <div class="sender-box">
+        <input [(ngModel)]="message" type="text" (keyup)="$event.keyCode ==13 && sendChat()"/>
+        <button type="submit"(click)="sendChat()" class="btn btn-success">Send</button>
+    </div>
+</div> 

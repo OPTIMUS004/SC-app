@@ -25,26 +25,39 @@ export class UserDashboardComponent implements OnInit {
 
 	constructor(public auth: AuthService, private route: ActivatedRoute) {
 
-	}
+    }
+
 	ngOnInit() {
 // route to user's page using snapshot
   this.route.params.forEach((params: Params) => {
     this.auth.getId(params.name);
   });
+  
 // get current user's credentials
-  this.user = this.auth.currentUser;
+this.user = this.auth.currentUser;
 
 // get list of all users
-  this.users = this.auth.getUsers();
+  this.auth.getUsers().subscribe((users: []) => {
+    function mapUsers(user) {
+      const randomNumber = Math.floor(Math.random() * this.length);
+      user.chap = this[randomNumber];
+      return { user };
+    }
+    users.map(mapUsers, this.auth.getChaperones());
+    console.log(users);
+    this.users = users
+    console.log(this.users);
   this.filterUsers = this.users.filter((userInUsers) => {
-
 // set gender of user to know clients to display
 if (this.user !== undefined) {
     this.genderOfUser = this.user.gender;
     return userInUsers.gender !== this.genderOfUser;
             }
         });
-    }
+    return this.users;
+  });
+}
+
 // function for searchbox
 searchSession(searchTerm) {
      this.auth.searchUsername(searchTerm).subscribe
@@ -55,7 +68,8 @@ searchSession(searchTerm) {
 
 // function called by use preference button
 usePreferenceToFilter() {
-    if (this.user.preference) {
+    if (this.user.preference ==='') {
+        
         if (this.user.preference.ageRange.youngerSet && this.user.preference.ageRange.youngestSet) {
             this.filterUsers = this.users.filter((userInUsers) => {
                 if ( userInUsers.age >= 18 && userInUsers.age <= 30 ) {
@@ -108,6 +122,7 @@ usePreferenceToFilter() {
             });
         }
     } else {
+        console.log(this.user);
         alert('You\'ve not set your preference');
       }
     }

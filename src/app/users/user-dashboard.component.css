@@ -1,9 +1,7 @@
 .flex-container{
     display: flex;
     flex-direction:row;
-}
-.right-panel{
-    background: #bbb;
+    background-color: #eee;
 }
 .content-three{
     background-color: #bbb;
@@ -11,10 +9,12 @@
 }
 .content-two{
     display: flex;
-    justify-content: center;
-    float:left;
+    flex-direction: row wrap;
+    float: right;
     margin: 10px 15px;
     padding-top: 20px;
+    height: auto;
+    width: 250px;
 }
 .logo{
     padding:0;

@@ -21,7 +21,7 @@ import { ToastrService } from 'ngx-toastr';
                     color: #fff;
                     outline: none;
                 }
-                .nav-link{
+                .nav-link, .sc-logo{
                     cursor: pointer;
                 }
                 
@@ -59,15 +59,28 @@ export class NavBarComponent implements OnInit {
     }
     loginUser(loginDetails) {
         this.loginForm.reset();
-        const currentUser = this.auth.loginUser(loginDetails.userName, loginDetails.password);
-
-        if(!currentUser){
-            this.toastr.error("Invalid Username or password");
-        }else{
-        this.toastr.success("Signed in successfully");
-        this.router.navigate([`/user/${this.auth.currentUser.username}`]);
-        }
-
+        this.auth.loginUser(loginDetails.userName, loginDetails.password)
+        .subscribe( data => {
+            this.auth.currentUser = data;
+            this.auth.isAuthenticated();
+            console.log(this.auth.isAuthenticated(), this.auth.currentUser);
+              
+            if(!this.auth.isAuthenticated()){
+              this.loginForm.reset();
+              console.log(this.auth.isAuthenticated());
+              this.toastr.error("Invalid Username or password");
+            }else{
+              console.log(this.auth.isAuthenticated());
+              this.toastr.success("Signed in successfully");
+              console.log(this.auth.isAuthenticated());
+              this.router.navigate([`/user/${this.auth.currentUser.username}`]);
+            }
+              return this.auth.currentUser;
+          })
+        
+    }
+    cancelSignIn() {
+        this.loginForm.reset();
     }
     logout() {
 
@@ -85,6 +98,12 @@ export class NavBarComponent implements OnInit {
     }
     comingSoon() {
         this.toastr.info("This feature is under construction");
+        if(this.auth.isAuthenticated()) {
+            this.router.navigate([`/chats`]);
+        }else{
+            this.toastr.warning("Login");
+            this.router.navigate(['/soul-connect'])
+        }
     }
     myFanciesPage(){
         this.userIsValid = this.auth.isAuthenticated()
@@ -92,7 +111,7 @@ export class NavBarComponent implements OnInit {
             this.router.navigate([`/user/contact-chap`]);
         }else{
             console.log(this.userIsValid);
-            this.toastr.warning("Select fancies");
+            this.toastr.warning("Add fancies");
         }
     }
 }

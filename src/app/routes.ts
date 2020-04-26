@@ -6,6 +6,7 @@ import { FullDetailsComponent } from './sc-folder/full-details.component';
 import { Error404Component } from './errors/error-404.component';
 import { SiteRouteActivator } from 'src/common/route-activator.service';
 import { UserProfileComponent } from './sc-folder/user-profile.component';
+import { ChatsComponent } from './chats/chats.component';
 
 export const appRoutes: Routes = [
   { path: 'soul-connect', component: ScHomepageComponent },
@@ -13,5 +14,6 @@ export const appRoutes: Routes = [
   { path: '404', component: Error404Component },
   { path: 'soul-connect/users/:name', component: FullDetailsComponent, canActivate: [SiteRouteActivator] },
   { path: 'edit-profile', component: UserProfileComponent },
+  { path: 'chats', component: ChatsComponent },
   { path: 'user', loadChildren: './users/user.module#UserModule'}
 ];

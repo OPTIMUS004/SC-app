@@ -11,6 +11,7 @@ import { AuthService } from '../sc-folder/services/auth.service';
                     padding-left: 4px;
                     padding-right: 4px;
                     margin-bottom: 7px;
+                    color: #fff
 
                 }
                 .entire-collapsible{
@@ -38,16 +39,20 @@ import { AuthService } from '../sc-folder/services/auth.service';
                 }
                 .checkbox{ cursor: pointer }
                 .content-one{
-                    background-color: #bbb;
+                    background-color: #111222;
                     padding-top: 20px;
-                    box-shadow: 0 10px 14px -7px #111;
+                    box-shadow: 5px 10px 14px -5px #111;
                     height: 100%;
+                    position: relative;
+                    z-index: 3;
+                    border-radius: 0 25px 25px 0; 
                 }
                 a:hover{
                     cursor: pointer;
                 }
                 .btn, .form-control{
                     border-radius: 0;
+                    margin-top: 15px;
                 }
     `]
 })

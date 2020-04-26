@@ -124,6 +124,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "frontedTemplate"
+    }
+  },
+  "defaultProject": "frontedTemplate",
+  "cli": {
+    "analytics": false
+  }
 }
