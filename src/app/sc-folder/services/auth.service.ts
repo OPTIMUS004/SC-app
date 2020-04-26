@@ -11,7 +11,7 @@ export class AuthService {
 
   currentUser;
   msgBody: string;
-  readonly baseURL = 'http://localhost:4000/api/users/';
+  readonly baseURL = 'https://sc-api-host-test.herokuapp.com/api/users/';
 
   constructor(private http: HttpClient, 
               private toastr: ToastrService) { }
@@ -33,7 +33,7 @@ export class AuthService {
   loginUser(userName: string, password: string) {
     // tslint:disable-next-line: no-use-before-declare
     const credOfUser = { username: userName, password: password}
-    return this.http.post('http://localhost:4000/api/login/', credOfUser)
+    return this.http.post('https://sc-api-host-test.herokuapp.com/api/login/', credOfUser)
     
   }
 
