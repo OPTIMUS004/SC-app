@@ -8,7 +8,7 @@ import { AuthService } from '../sc-folder/services/auth.service';
 })
 export class WebSocketService {
   socket: any;
-  readonly url : string = "https://sc-api-host-test.herokuapp.com";
+  readonly url : string = "https://sc-chat-api.herokuapp.com";
 
   constructor( private authService: AuthService ) { 
     this.socket = io(this.url);
