@@ -12,6 +12,7 @@ export class AuthService {
   currentUser;
   msgBody: string;
   readonly baseURL = 'https://sc-api-host-test.herokuapp.com/api/users/';
+  
 
   constructor(private http: HttpClient, 
               private toastr: ToastrService) { }
@@ -34,7 +35,10 @@ export class AuthService {
     // tslint:disable-next-line: no-use-before-declare
     const credOfUser = { username: userName, password: password}
     return this.http.post('https://sc-api-host-test.herokuapp.com/api/login/', credOfUser)
-    
+    .pipe(
+      tap(data => console.log(data)),
+      catchError(this.handleError)
+    )
   }
 
   logout() {
@@ -79,7 +83,8 @@ export class AuthService {
   }
   EditProfile(editedProfile) {
     // tslint:disable-next-line: no-use-before-declare
-    users.find((user) => {
+  //  users.find((user) => {
+      /*
       if (user === this.currentUser) {
         user.aboutYou = editedProfile.aboutYou;
         user.kids = editedProfile.kids;
@@ -95,7 +100,9 @@ export class AuthService {
         user.image = editedProfile.image;
         this.currentUser = user;
       }
-    });
+      */
+     return this.http.patch(`${this.baseURL}/${this.currentUser.username}`, editedProfile)
+
   }
   searchUsername(searchTerm) {
     const term = searchTerm.toLocaleLowerCase();
