@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from './services/auth.service';
 import { Router } from '@angular/router';
 import { requiredFileType } from './services/requiredFileType.validator';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'user-profile',
@@ -32,7 +33,7 @@ export class UserProfileComponent implements OnInit {
     gender: FormControl;
     confirmPassword: FormControl;
     rStatus: FormControl;
-    constructor( private auth: AuthService, private router: Router ) {}
+    constructor( private auth: AuthService, private router: Router, private toastr: ToastrService ) {}
     ngOnInit() {
         this.userProfile = this.auth.currentUser;
         this.firstname = new FormControl(this.userProfile.firstname, Validators.required);
@@ -79,8 +80,15 @@ export class UserProfileComponent implements OnInit {
     saveEditedProfile(formValue) {
 
        if (formValue.password === formValue.confirmPassword) {
-           this.auth.EditProfile(formValue);
-           this.router.navigate([`/user/${this.userProfile.username}`]);
+           this.auth.EditProfile(formValue)
+       }else{
+        this.toastr.error("Password must be the same!");
+       }
+       if(this.auth.currentUser._id) {
+        this.toastr.success("Updated successfully");
+        this.router.navigate([`/user/${this.userProfile.username}`]);
+       }else{
+
        }
     }
 }

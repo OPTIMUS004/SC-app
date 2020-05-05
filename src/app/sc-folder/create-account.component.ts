@@ -118,8 +118,8 @@ saveUser(usersInput) {
 if (usersInput.confirmPassword === usersInput.password && this.loginForm.valid) {
     const newbee = this.auth.saveNewUser(usersInput);
     if (newbee){
-        this.toastr.success("Account created successfully");
-        this.router.navigate([`/edit-profile`]);
+      this.toastr.success("Account created successfully");
+      this.router.navigate([`/edit-profile`]);
     }
 }else{
     this.toastr.error("Invalid form!");
