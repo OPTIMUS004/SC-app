@@ -103,9 +103,9 @@ export class AuthService {
       */
      return this.http.patch(`${this.baseURL}/${this.currentUser.username}`, editedProfile).
      subscribe(
-       data => {
+       (data) => {
          console.log(data);
-         if(data._id){
+         if(data){
            this.currentUser = data;
            return this.currentUser;
          }
