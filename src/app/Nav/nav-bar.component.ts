@@ -24,7 +24,11 @@ import { ToastrService } from 'ngx-toastr';
                 .nav-link, .sc-logo{
                     cursor: pointer;
                 }
-                
+                .comment-two{
+                    float: right;
+                    background-color: tomato;
+                    color: #fff;
+                }
                 @media only screen and (min-width: 700px) {
                     .dontShow{
                         display: none;

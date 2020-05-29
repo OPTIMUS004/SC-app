@@ -1,6 +1,6 @@
 <div class="form-group">
-    <button type="button" class="btn btn-fb"><i class= "fa fa-facebook"></i> Facebook sign up</button>
-    <button type="button" class="btn btn-gg"><i class="fa fa-google"></i> Google Sign up</button>
+    <button type="button" class="btn btn-fb" (click)='comingSoon()'><i class= "fa fa-facebook"></i> Facebook sign up</button>
+    <button type="button" class="btn btn-gg" (click)='comingSoon()'><i class="fa fa-google"></i> Google Sign up</button>
 </div>
 <form [formGroup]="loginForm" (ngSubmit)="saveUser(loginForm.value)">
 

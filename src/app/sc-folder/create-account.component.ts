@@ -114,6 +114,9 @@ this.loginForm = new FormGroup({
     confirmPassword
 });
 }
+comingSoon() {
+    this.toastr.warning('This Button is under construction', 'Coming Soon')
+}
 saveUser(usersInput) {
 if (usersInput.confirmPassword === usersInput.password && this.loginForm.valid) {
     const newbee = this.auth.saveNewUser(usersInput);

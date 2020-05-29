@@ -13,15 +13,18 @@ export class WebSocketService {
   constructor( private authService: AuthService ) { 
     this.socket = io(this.url);
   }
-    sendMessage(message){
-      let date = new Date();
-      this.socket.emit("newMessage", 
-      {
-        user: this.authService.currentUser.username,
-        message: message,
-        dateStamp: `${date.getUTCHours()}:${date.getUTCMinutes()}`
-      });
-    }
+  sendMessage(message){
+    let date = new Date();
+    let hour = date.getHours();
+    let minutes = date.getUTCMinutes();
+    let periodOfDay = hour < 12 ? 'am' : 'pm';
+    this.socket.emit("newMessage", 
+    {
+      user: this.authService.currentUser.username,
+      message: message,
+      dateStamp: `${hour}:${minutes} ${periodOfDay}`
+    });
+  }
     getMessages = () => {
       return Observable.create((observer) => {
         this.socket.on('newMessage', (message) => {
