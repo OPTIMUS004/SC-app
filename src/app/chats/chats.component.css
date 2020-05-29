@@ -4,8 +4,8 @@
 }.cardboard{
     overflow-y: auto;
     overflow-x: hidden;
-    max-height: 640px;
-    min-height: 640px;
+    max-height: 550px;
+    min-height: 550px;
     background-image: url('/assets/images/chat-bg.jpg');
     background-size: cover;
     padding: 30px;
@@ -18,13 +18,14 @@
     margin-bottom: 15px;
     border-radius: 5px;
     display: flex;
-    flex-grow: 1;
-    flex-direction: column;
-    justify-content: flex-end;
+    justify-content: center;
 }
 .sender-box{
     bottom: 10px;
     font-family: fantasy;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .btn{
     border-radius: 4px;
