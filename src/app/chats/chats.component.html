@@ -1,6 +1,12 @@
 
 <div class="container">
-    <div class="cardboard">
+    <div class='flex liner'>
+        <div class='bg-dark  shadow row'>
+            <button class='btn general-btn'>General</button>
+            <!--   <button class='btn btn-default'>Friends</button> -->
+        </div>
+    </div>
+    <div class="cardboard shadow">
         <div class="chat-box" *ngFor="let message of messages" 
             [ngStyle]="setSenderStyle(message)" >
             <div>

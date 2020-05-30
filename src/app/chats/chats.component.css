@@ -1,7 +1,17 @@
 .container {
-    
     padding-top: 30px;
-}.cardboard{
+}
+.liner{
+    padding: 0 15px 0 15px;
+}
+.btn{
+    border-radius: 0%;
+    color: #f1f1f1;
+}
+.general-btn{
+    border-bottom: 2px solid #fff;
+}
+.cardboard{
     overflow-y: auto;
     overflow-x: hidden;
     max-height: 550px;
@@ -20,16 +30,16 @@
 }
 .sender-box{
     bottom: 10px;
+    margin-top: 2px;
     font-family: fantasy;
     display: flex;
     justify-content: center;
     align-items: center;
-}
-.btn{
-    border-radius: 4px;
+    background-color: rgb(22, 22, 27);
 }
 input[type='text'] {
     font-family: sans-serif;
+    height: 38px;
 }
 ::-webkit-scrollbar{
     width: 10px;

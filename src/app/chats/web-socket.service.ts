@@ -14,18 +14,19 @@ export class WebSocketService {
     this.socket = io(this.url);
   }
   sendMessage(message){
-    let date = new Date();
-    let hour = date.getHours();
-    let minutes = date.getUTCMinutes();
-    let periodOfDay = hour < 12 ? 'am' : 'pm';
-    this.socket.emit("newMessage", 
-    {
+    let date = new Date().toLocaleTimeString();
+    let messanger = {
       user: this.authService.currentUser.username,
       message: message,
-      dateStamp: `${hour}:${minutes} ${periodOfDay}`
-    });
+      dateStamp: `${date}`
+    };
+    if (messanger.message === ' ' || messanger.message === '') {
+      return;
+    }else{
+      this.socket.emit("newMessage", messanger)
+    }
   }
-    getMessages = () => {
+  getMessages = () => {
       return Observable.create((observer) => {
         this.socket.on('newMessage', (message) => {
           console.log(message);
