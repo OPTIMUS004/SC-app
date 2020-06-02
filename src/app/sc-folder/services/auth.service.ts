@@ -2,7 +2,6 @@ import { Injectable, EventEmitter } from '@angular/core';
 import { HttpHeaders, HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError, tap } from 'rxjs/operators';
 import { Observable, of, throwError } from 'rxjs';
-import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 
 @Injectable()
@@ -11,30 +10,25 @@ export class AuthService {
 
   currentUser;
   msgBody: string;
-  readonly baseURL = 'https://sc-api-host-test.herokuapp.com/api/users/';
+  readonly baseURL = 'https://sc-api-host-test.herokuapp.com/api/';   //http://localhost:3000/api
   
-
   constructor(private http: HttpClient, 
               private toastr: ToastrService) { }
 
   getUsers() {
-    // calculate age of each user and assign chapeone before subscription.
-
-    // tslint:disable-next-line: no-use-before-declare
-    return this.http.get(this.baseURL)
+    return this.http.get(`${this.baseURL}/users`)
     .pipe(
       tap(data=> console.log('All: ' + JSON.stringify(data))),
-      catchError(this.handleError)
-    )
+      catchError(this.handleError))
   }
+
   getId(name) {
-    // tslint:disable-next-line: no-use-before-declare
     return users.find(user => user.username === name);
   }
+
   loginUser(userName: string, password: string) {
-    // tslint:disable-next-line: no-use-before-declare
     const credOfUser = { username: userName, password: password}
-    return this.http.post('https://sc-api-host-test.herokuapp.com/api/login/', credOfUser)
+    return this.http.post(`${this.baseURL}/login/`, credOfUser)
     .pipe(
       tap(data => console.log(data)),
       catchError(this.handleError)
@@ -82,37 +76,11 @@ export class AuthService {
     return this.http.post(this.baseURL, newUser).subscribe()
   }
   EditProfile(editedProfile) {
-    // tslint:disable-next-line: no-use-before-declare
-  //  users.find((user) => {
-      /*
-      if (user === this.currentUser) {
-        user.aboutYou = editedProfile.aboutYou;
-        user.kids = editedProfile.kids;
-        user.email = editedProfile.email;
-        user.rStatus = editedProfile.rStatus;
-        user.height = editedProfile.height;
-        user.salary = editedProfile.salary;
-        user.firstname = editedProfile.firstname;
-        user.lastname = editedProfile.lastname;
-        user.password = editedProfile.password;
-        user.workStatus = editedProfile.workStatus;
-        user.username = editedProfile.username;
-        user.image = editedProfile.image;
-        this.currentUser = user;
-      }
-      */
-     return this.http.patch(`${this.baseURL}${this.currentUser.username}`, editedProfile).
-     subscribe(
-       (data) => {
-         console.log('patcch data',data);
-         if(data){
-           this.currentUser = data;
-           return this.currentUser;
-         }
-       }
-     );
-
-  }
+     return this.http.patch(`${this.baseURL}/patch/${this.currentUser._id}`, editedProfile)
+     .pipe(
+      tap(data => console.log(data, `${this.baseURL}/users/${this.currentUser.username}`)),
+      catchError(this.handleError))
+    }
   searchUsername(searchTerm) {
     const term = searchTerm.toLocaleLowerCase();
     let result = [];

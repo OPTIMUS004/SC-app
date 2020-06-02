@@ -81,14 +81,18 @@ export class UserProfileComponent implements OnInit {
 
        if (formValue.password === formValue.confirmPassword) {
            this.auth.EditProfile(formValue)
+           .subscribe(
+               data => {
+                if(data.hasOwnProperty('_id')) {
+                    this.toastr.success("Sign in to apply changes", "Updated successfully");
+                    this.auth.logout();
+                    this.router.navigate([`/soul-connect`]);
+                   }else{
+                    this.toastr.error("Update not successful");
+                   }
+               })
        }else{
         this.toastr.error("Password must be the same!");
-       }
-       if(this.auth.currentUser._id) {
-        this.toastr.success("Updated successfully");
-        this.router.navigate([`/user/${this.userProfile.username}`]);
-       }else{
-
        }
     }
 }
