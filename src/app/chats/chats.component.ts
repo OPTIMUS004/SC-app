@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { WebSocketService } from './web-socket.service';
 import { AuthService } from '../sc-folder/services/auth.service';
 import { FormGroup } from '@angular/forms';
@@ -13,7 +13,9 @@ export class ChatsComponent implements OnInit{
   chatForm: FormGroup;
   message: string;
   messages: string[] = [];
-  userName = this.auth.currentUser.username
+  userName = this.auth.currentUser.username;
+  
+
   constructor( private webSocket: WebSocketService, private auth: AuthService ) { }
 
   sendChat(){

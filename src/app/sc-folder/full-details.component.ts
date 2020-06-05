@@ -20,14 +20,14 @@ import { ActivatedRoute } from '@angular/router';
                 <div class="body">
                     <div class="content">
                         <h6>Username: {{viewFemale?.username}}</h6>
-                        <h6>Age: {{age}} years</h6>
+                        <h6>Age: {{viewFemale?.age}} years</h6>
                         <h6>Status: {{viewFemale?.rStatus}}</h6>
                         <h6>Height: {{viewFemale?.height}}</h6>
                         <h6>Education Level: </h6>
                         <h6>Ethnicity: {{viewFemale?.ethnicity}}</h6>
                         <h6>Location:</h6>
-                        <h6>Kids:{{viewFemale?.kids}}</h6>
-
+                        <h6>Kids: {{viewFemale?.kids}}</h6>
+                        <h6>About: {{viewFemale?.aboutYou}}</h6>
                     </div>
                 </div>
 
@@ -90,10 +90,6 @@ export class FullDetailsComponent implements OnInit {
 
     // get details fromsnapshot params
         this.viewFemale = this.auth.getId(this.route.snapshot.params.name);
-
-        const thisYear = this.date.getFullYear();
-        const usersYear = this.viewFemale.dob.split('/')[2]
-        this.age = thisYear - parseInt( usersYear, 10);
     }
 
 }

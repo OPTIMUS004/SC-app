@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { AuthService } from '../sc-folder/services/auth.service';
+import { ToastrService } from 'ngx-toastr';
+
 
 @Component({
 selector: 'left-panel',
@@ -30,10 +32,14 @@ animations: [trigger ('fadeInOut', [
 
 export class LeftPanelComponent {
 
-    constructor( private auth: AuthService) {}
+    constructor( private auth: AuthService, private toastr: ToastrService) {}
     msgChap() {
         this.auth.generateMsgForChap();
         this.auth.msgchap()
-        .subscribe();
+        .subscribe(data => {
+            if(data.accepted){
+               this.toastr.success('Message sent Successfully');
+            }
+        });
     }
 }

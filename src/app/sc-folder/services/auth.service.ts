@@ -9,7 +9,7 @@ import { ToastrService } from 'ngx-toastr';
 export class AuthService {
 
   currentUser;
-  msgBody: string;
+  msgBody: object;
   readonly baseURL = 'https://sc-api-host-test.herokuapp.com/api/';   //http://localhost:3000/api
   
   constructor(private http: HttpClient, 
@@ -23,12 +23,20 @@ export class AuthService {
   }
 
   getId(name) {
-    return users.find(user => user.username === name);
+    this.getUsers().subscribe((data ) => {
+      if (data instanceof(Array)){
+      data.forEach(user => {
+        if (user.username === name) {
+          return user;
+        }
+      })
+    }
+      });
   }
 
   loginUser(userName: string, password: string) {
     const credOfUser = { username: userName, password: password}
-    return this.http.post(`${this.baseURL}/login/`, credOfUser)
+    return this.http.post(`${this.baseURL}/login`, credOfUser)
     .pipe(
       tap(data => console.log(data)),
       catchError(this.handleError)
@@ -84,41 +92,16 @@ export class AuthService {
   searchUsername(searchTerm) {
     const term = searchTerm.toLocaleLowerCase();
     let result = [];
-
-    // tslint:disable-next-line: no-use-before-declare
-    users.forEach(detail => {
-      if (detail.username.toLocaleLowerCase() === term) {
-        result = result.concat(detail);
-      }
-
-    });
-    const emitter = new EventEmitter(true);
-    setTimeout(() => {
-      emitter.emit(result);
-    }, 100);
-    return emitter;
   }
   updateAgePreference(agePreference) {
-    // tslint:disable-next-line: no-use-before-declare
-    users.find((user) => {
-      if (user.username === this.currentUser.username && user.password === this.currentUser.password) {
-        user.preference = agePreference;
-        this.currentUser = user;
-      }
-    });
-  }
+    this.currentUser.preference = agePreference;
+ }
   deleteLike(user) {
     this.currentUser.favorite.splice(user, 1);
   }
   addLike(user) {
-
-    this.currentUser.favorite.push(user);
-    // tslint:disable-next-line: no-use-before-declare
-    users.forEach(element => {
-      if (element === user) {
-        element.proposes.push(this.currentUser);
-      }
-    });
+    this.currentUser.favorite[0]==='' ? this.currentUser.favorite=[] : this.currentUser.favorite.push(user);
+    this.currentUser.proposes.push(this.currentUser);
   }
   userHasLiked(user) {
     if (this.isAuthenticated()) {
@@ -129,6 +112,7 @@ export class AuthService {
     return this.currentUser.favorite;
   }
   generateMsgForChap() {
+    console.log(this.currentUser.favorite);
     let fancyOne = '';
     let fancyOneFullName = '';
     let fancyTwo = '';
@@ -140,19 +124,25 @@ export class AuthService {
     } else if ((this.currentUser.favorite.length > 2)) {
       this.toastr.warning('You can only pick two fancies');
     } else {
-
+      console.log(this.currentUser.favorite);
       fancyOne = this.currentUser.favorite[0].username;
       fancyOneFullName = `${this.currentUser.favorite[0].firstname} ${this.currentUser.favorite[0].lastname}`;
       fancyTwoFullName = `${this.currentUser.favorite[1].firstname} ${this.currentUser.favorite[1].lastname}`;
       fancyTwo = this.currentUser.favorite[1].username;
 
-      this.msgBody = `Assalamalaykum waramotullah,\n
-  Hope this message meets you well.\n
-  After carefully looking through the available Fancies.\n
-  I fancy the following profile(s).\n
-  1. ${fancyOneFullName} with username ${fancyOne}\n
-  2. ${fancyTwoFullName} with username ${fancyTwo}\n
-  `;
+      this.msgBody = {
+       username: this.currentUser.username,
+
+       msg: 
+       `Assalamalaykum waramotullah,<br/>
+  Hope this message meets you well.<br/>
+  After carefully looking through the available Fancies.<br/>
+  I fancy the following profile(s).<br/>
+  1. ${fancyOneFullName} with username ${fancyOne}<br/>
+  2. ${fancyTwoFullName} with username ${fancyTwo}<br/>
+  `,
+      chap: this.currentUser.chap
+}
     }
 
   }
@@ -161,12 +151,11 @@ export class AuthService {
     const options = { headers: new HttpHeaders({
       'Content-Type': 'application/json'
   })};
-    return this.http.post('https://www.formspree.com/macbrill13@gmail.com', this.msgBody, options)
+    return this.http.post(`${this.baseURL}/sendmail/`, this.msgBody, options)
     .pipe(
       tap( data => console.log('All: ' +  JSON.stringify(data))),
       catchError(this.handleError)
     )
-    
   }
   isAuthenticated() {
 
@@ -188,320 +177,6 @@ export class AuthService {
 
 }
 
-const users = [
-  {
-    firstname: 'Ayoola',
-    lastname: 'Taiwo',
-    username: 'integral',
-    password: '12345678',
-    gender: 'male',
-    dob: '12/10/1990',
-    age: 0,
-    preference: '',
-    image: '',
-    email: 'tayoola13@yahoo.com',
-    height: '1.4',
-    bodyType: '',
-    rStatus: 'single',
-    kids: 'none',
-    educationLevel: 'Bachelor',
-    ethnicity: 'yoruba',
-    religionSect: 'none',
-    workStatus: { employed: true, occupation: 'teacher' },
-    salary: '10000',
-    favorite: [''],
-    proposes: [''],
-    aboutYou: 'a muslim, would love to be with someone who is ready to start a family'
-  },
-  {
-    firstname: 'Malala',
-    lastname: 'Chuks',
-    username: 'Wells',
-    password: '12345678',
-    gender: 'male',
-    age: 0,
-    preference: '',
-    image: '',
-    dob: '12/10/1990',
-    email: 'tayoola13@yahoo.com',
-    height: '1.4',
-    bodyType: '',
-    rStatus: 'single',
-    kids: 'none',
-    favorite: [],
-    proposes: [''],
-    educationLevel: 'Bachelor',
-    ethnicity: 'yoruba',
-    religionSect: 'none',
-    workStatus: { employed: true, occupation: 'teacher' },
-    salary: '10000',
-    aboutYou: 'a muslim, would love to be with someone who is ready to start a family'
-  },
-  {
-    firstname: 'Babs',
-    lastname: 'Oje',
-    username: 'Dibu',
-    password: '12345678',
-    gender: 'male',
-    email: 'tayoola13@yahoo.com',
-    height: '1.4',
-    bodyType: '',
-    dob: '12/10/1990',
-    age: 0,
-    preference: '',
-    image: '',
-    rStatus: 'single',
-    kids: 'none',
-    educationLevel: 'Bachelor',
-    ethnicity: 'yoruba',
-    religionSect: 'none',
-    workStatus: { employed: true, occupation: 'teacher' },
-    salary: '10000',
-    aboutYou: 'a muslim, would love to be with someone who is ready to start a family',
-    favorite: [''],
-    proposes: [''],
-  },
-  {
-    firstname: 'Muse',
-    lastname: 'Bola',
-    username: 'bold',
-    password: '12345678',
-    gender: 'male',
-    dob: '12/10/1990',
-    email: 'tayoola13@yahoo.com',
-    favorite: [''],
-    proposes: [''],
-    height: '1.4',
-    age: 0,
-    preference: '',
-    image: '',
-    bodyType: '',
-    rStatus: 'single',
-    kids: 'none',
-    educationLevel: 'Bachelor',
-    ethnicity: 'yoruba',
-    religionSect: 'none',
-    workStatus: { employed: true, occupation: 'teacher' },
-    salary: '10000',
-    aboutYou: 'a muslim, would love to be with someone who is ready to start a family'
-  },
-  {
-    firstname: 'Ayoola',
-    lastname: 'kehinde',
-    username: 'kennyket',
-    password: '12345678',
-    gender: 'female',
-    dob: '12/10/1990',
-    email: 'tayoola13@yahoo.com',
-    height: '1.4',
-    favorite: [''],
-    bodyType: '',
-    age: 0,
-    preference: '',
-    image: '',
-    proposes: [''],
-    rStatus: 'single',
-    kids: 'none',
-    educationLevel: 'spinster',
-    ethnicity: 'yoruba',
-    religionSect: 'none',
-    workStatus: { employed: true, occupation: 'teacher' },
-    salary: '10000',
-    aboutYou: 'a muslim, would love to be with someone who is ready to start a family'
-  },
-  {
-    firstname: 'Pitan',
-    lastname: 'Charles',
-    username: 'SlayQ',
-    password: '12345678',
-    gender: 'female',
-    dob: '12/10/1990',
-    email: 'tayoola13@yahoo.com',
-    height: '1.4',
-    bodyType: '',
-    age: 0,
-    preference: '',
-    image: '',
-    rStatus: 'single',
-    kids: 'none',
-    favorite: [''],
-    proposes: [''],
-    educationLevel: 'spinster',
-    ethnicity: 'yoruba',
-    religionSect: 'none',
-    workStatus: { employed: true, occupation: 'teacher' },
-    salary: '10000',
-    aboutYou: 'a muslim, would love to be with someone who is ready to start a family'
-  },
-  {
-    firstname: 'Nonso',
-    lastname: 'Alaba',
-    username: 'Jeff',
-    password: '12345678',
-    gender: 'female',
-    dob: '12/10/1990',
-    email: 'tayoola13@yahoo.com',
-    height: '1.4',
-    bodyType: '',
-    age: 0,
-    preference: '',
-    image: '',
-    favorite: [''],
-    proposes: [''],
-    rStatus: 'single',
-    kids: 'none',
-    educationLevel: 'spinster',
-    ethnicity: 'yoruba',
-    religionSect: 'none',
-    workStatus: { employed: true, occupation: 'teacher' },
-    salary: '10000',
-    aboutYou: 'a muslim, would love to be with someone who is ready to start a family'
-  },
-  {
-    firstname: 'Chukundi',
-    lastname: 'Elisa',
-    username: 'Georgia',
-    password: '12345678',
-    gender: 'female',
-    dob: '12/10/1990',
-    email: 'tayoola13@yahoo.com',
-    height: '1.4',
-    bodyType: '',
-    age: 0,
-    preference: '',
-    image: '',
-    rStatus: 'single',
-    kids: 'none',
-    favorite: [''],
-    proposes: [''],
-    educationLevel: 'spinster',
-    ethnicity: 'yoruba',
-    religionSect: 'none',
-    workStatus: { employed: true, occupation: 'teacher' },
-    salary: '10000',
-    aboutYou: 'a muslim, would love to be with someone who is ready to start a family'
-  },
-  {
-    firstname: 'adrian',
-    lastname: 'Donovan',
-    username: 'Mississippi',
-    password: '12345678',
-    gender: 'female',
-    dob: '12/10/1990',
-    email: 'tayoola13@yahoo.com',
-    height: '1.4',
-    bodyType: '',
-    age: 0,
-    preference: '',
-    image: '',
-    favorite: [''],
-    proposes: [''],
-    rStatus: 'single',
-    kids: 'none',
-    educationLevel: 'spinster',
-    ethnicity: 'yoruba',
-    religionSect: 'none',
-    workStatus: { employed: true, occupation: 'teacher' },
-    salary: '10000',
-    aboutYou: 'a muslim, would love to be with someone who is ready to start a family'
-  },
-  {
-    firstname: 'judy',
-    lastname: 'Bobby',
-    username: 'Tilda',
-    password: '12345678',
-    gender: 'female',
-    dob: '12/10/1990',
-    email: 'tayoola13@yahoo.com',
-    height: '1.4',
-    age: 0,
-    preference: '',
-    image: '',
-    bodyType: '',
-    favorite: [''],
-    proposes: [''],
-    rStatus: 'single',
-    kids: 'none',
-    educationLevel: 'spinster',
-    ethnicity: 'yoruba',
-    religionSect: 'none',
-    workStatus: { employed: true, occupation: 'teacher' },
-    salary: '10000',
-    aboutYou: 'a muslim, would love to be with someone who is ready to start a family'
-  },
-  {
-    firstname: 'Mabinu',
-    lastname: 'ayeola',
-    username: 'Jordy',
-    password: '12345678',
-    gender: 'female',
-    dob: '12/10/1990',
-    email: 'tayoola13@yahoo.com',
-    height: '1.4',
-    bodyType: '',
-    age: 0,
-    preference: '',
-    image: '',
-    favorite: [''],
-    proposes: [''],
-    rStatus: 'single',
-    kids: 'none',
-    educationLevel: 'spinster',
-    ethnicity: 'yoruba',
-    religionSect: 'none',
-    workStatus: { employed: true, occupation: 'teacher' },
-    salary: '10000',
-    aboutYou: 'a muslim, would love to be with someone who is ready to start a family'
-  },
-  {
-    firstname: 'Sekono',
-    lastname: 'Goke',
-    username: 'baoku',
-    password: '12345678',
-    gender: 'female',
-    dob: '12/10/1990',
-    email: 'tayoola13@yahoo.com',
-    height: '1.4',
-    age: 0,
-    preference: '',
-    image: '',
-    bodyType: '',
-    favorite: [''],
-    proposes: [''],
-    rStatus: 'single',
-    kids: 'none',
-    educationLevel: 'spinster',
-    ethnicity: 'yoruba',
-    religionSect: 'none',
-    workStatus: { employed: true, occupation: 'teacher' },
-    salary: '10000',
-    aboutYou: 'a muslim, would love to be with someone who is ready to start a family'
-  },
-  {
-    firstname: 'Toa',
-    lastname: 'Ukulele',
-    username: 'Founder',
-    password: '12345678',
-    gender: 'female',
-    dob: '12/10/1990',
-    email: 'tayoola13@yahoo.com',
-    height: '1.4',
-    bodyType: '',
-    age: 0,
-    preference: '',
-    image: '',
-    favorite: [''],
-    proposes: [''],
-    rStatus: 'single',
-    kids: 'none',
-    educationLevel: 'spinster',
-    ethnicity: 'yoruba',
-    religionSect: 'none',
-    workStatus: { employed: true, occupation: 'teacher' },
-    salary: '10000',
-    aboutYou: 'a muslim, would love to be with someone who is ready to start a family'
-  }
-];
 const chaperones = [
   { username: 'Ay', email: 'macndoe.com' },
   { username: 'By', email: 'integraldoe.com' },

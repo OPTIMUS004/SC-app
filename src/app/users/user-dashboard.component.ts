@@ -60,10 +60,10 @@ if (this.user !== undefined) {
 
 // function for searchbox
 searchSession(searchTerm) {
-     this.auth.searchUsername(searchTerm).subscribe
-        ( matchingUser => {
-            this.foundSearch = matchingUser;
-        });
+     //this.auth.searchUsername(searchTerm).subscribe
+       // ( matchingUser => {
+          //  this.foundSearch = matchingUser;
+        //});
     }
 
 // function called by use preference button

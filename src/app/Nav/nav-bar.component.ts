@@ -67,7 +67,7 @@ export class NavBarComponent implements OnInit {
         .subscribe( data => {
             this.auth.currentUser = data;
             this.auth.isAuthenticated();
-            console.log(this.auth.isAuthenticated(), this.auth.currentUser);
+            console.log(data);
               
             if(!this.auth.isAuthenticated()){
               this.loginForm.reset();
