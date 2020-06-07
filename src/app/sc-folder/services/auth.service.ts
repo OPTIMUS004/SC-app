@@ -10,7 +10,7 @@ export class AuthService {
 
   currentUser;
   msgBody: object;
-  readonly baseURL = 'https://sc-api-host-test.herokuapp.com/api/';   //http://localhost:3000/api
+  readonly baseURL = 'https://sc-api-host-test.herokuapp.com/api/';   // http://localhost:3000/api
   
   constructor(private http: HttpClient, 
               private toastr: ToastrService) { }
@@ -23,15 +23,10 @@ export class AuthService {
   }
 
   getId(name) {
-    this.getUsers().subscribe((data ) => {
-      if (data instanceof(Array)){
-      data.forEach(user => {
-        if (user.username === name) {
-          return user;
-        }
-      })
-    }
-      });
+    return this.http.get(`${this.baseURL}/users/${name}`)
+    .pipe(
+      tap(data => console.log(data)),
+      catchError(this.handleError))
   }
 
   loginUser(userName: string, password: string) {

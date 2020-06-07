@@ -5,18 +5,16 @@ import { Injectable } from '@angular/core';
 @Injectable()
 
 export class SiteRouteActivator implements CanActivate {
-
-    constructor(private router: Router, private auth: AuthService ) {
-
-    }
+    
+    constructor(private router: Router, private auth: AuthService ) {}
 
     canActivate(route: ActivatedRouteSnapshot) {
-        const routeExists = +this.auth.getId(route.params.name);
+        const routeExists = !!this.auth.getId(route.params.name);
 
         if (!routeExists) {
-            console.log(routeExists);
             this.router.navigate(['/404']);
         }
         return routeExists;
     }
 }
+

@@ -40,7 +40,7 @@
                             </div>
                         </div>
                         <div class="bg-dark text-center">
-                            <span class="text-light" [routerLink] = "['/soul-connect/users',user?.username]"><a class="btn btn-success">More Details</a></span>
+                            <span class="text-light" [routerLink] = "['/soul-connect/users',user?._id]"><a class="btn btn-success">More Details</a></span>
                             <favorite (like)="toggleFavorite(user)" [liked]="userHasLiked(user)"></favorite>
                         </div>
                     </div>

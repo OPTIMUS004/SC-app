@@ -7,9 +7,9 @@
         </div>
     </div>
     <div class="cardboard shadow">
-        <div class="chat-box" *ngFor="let message of messages; let i=index" 
+        <div class="chat-box" *ngFor="let message of messages" 
             [ngStyle]="setSenderStyle(message)" >
-            <div #para>
+            <div>
             <span class="small-size">{{message.user | titlecase }}</span><br />
                 {{message.message}} <span class="small-size timeStampStyle">{{message.dateStamp}}</span>
             </div>

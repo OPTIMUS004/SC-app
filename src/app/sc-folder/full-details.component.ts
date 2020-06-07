@@ -10,24 +10,24 @@ import { ActivatedRoute } from '@angular/router';
             <hr class="bg-light" />
         </div>
         <img src="/assets/images/img_avatar2.png" alt="incoming">
-        <div class="details">
+        <div class="card">
             <div class="">
                 <span>
-                <h1 class="title"> {{viewFemale?.firstname | uppercase}} {{viewFemale?.lastname | uppercase}}</h1>
+                <h1 class="title"> {{viewProfile?.firstname | uppercase}} {{viewProfile?.lastname | uppercase}}</h1>
                 </span>
             </div>
             <div>
                 <div class="body">
                     <div class="content">
-                        <h6>Username: {{viewFemale?.username}}</h6>
-                        <h6>Age: {{viewFemale?.age}} years</h6>
-                        <h6>Status: {{viewFemale?.rStatus}}</h6>
-                        <h6>Height: {{viewFemale?.height}}</h6>
+                        <h6>Username: {{viewProfile?.username}}</h6>
+                        <h6>Age: {{viewProfile?.age}} years</h6>
+                        <h6>Status: {{viewProfile?.rStatus}}</h6>
+                        <h6>Height: {{viewProfile?.height}}</h6>
                         <h6>Education Level: </h6>
-                        <h6>Ethnicity: {{viewFemale?.ethnicity}}</h6>
+                        <h6>Ethnicity: {{viewProfile?.ethnicity}}</h6>
                         <h6>Location:</h6>
-                        <h6>Kids: {{viewFemale?.kids}}</h6>
-                        <h6>About: {{viewFemale?.aboutYou}}</h6>
+                        <h6>Kids: {{viewProfile?.kids}}</h6>
+                        <h6>About: {{viewProfile?.aboutYou}}</h6>
                     </div>
                 </div>
 
@@ -48,7 +48,7 @@ import { ActivatedRoute } from '@angular/router';
                     color: #fff;
                     padding: 8px;
                 }
-                .details{
+                .card{
                     padding-left: 15px;
                     padding-right: 15px;
                     padding-bottom: 20px;
@@ -59,8 +59,9 @@ import { ActivatedRoute } from '@angular/router';
                 }
                 img{
                     border-radius: 100%;
-                    position: absolute;
-                    left: 47%;
+                    display: flex;
+                    justify-content: center;
+                    justify-items: center
                     border:2px solid #aaa;
                     max-width: 100px;
                     max-height: 120px;
@@ -78,7 +79,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 
 export class FullDetailsComponent implements OnInit {
-    viewFemale: any;
+    viewProfile: any;
     date = new Date();
     age: any;
 
@@ -88,8 +89,14 @@ export class FullDetailsComponent implements OnInit {
     }
     ngOnInit() {
 
-    // get details fromsnapshot params
-        this.viewFemale = this.auth.getId(this.route.snapshot.params.name);
+    // get details from snapshot params
+        this.viewProfile = this.auth.getId(this.route.snapshot.params.name).subscribe(
+            (data)=>{
+                this.viewProfile = data;
+                console.log(this.viewProfile);
+            return this.viewProfile;
+            }
+        );
     }
 
 }

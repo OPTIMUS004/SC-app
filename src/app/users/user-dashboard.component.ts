@@ -44,9 +44,7 @@ this.user = this.auth.currentUser;
       return { user };
     }
     users.map(mapUsers, this.auth.getChaperones());
-    console.log(users);
     this.users = users
-    console.log(this.users);
   this.filterUsers = this.users.filter((userInUsers) => {
 // set gender of user to know clients to display
 if (this.user !== undefined) {
@@ -122,7 +120,7 @@ usePreferenceToFilter() {
             });
         }
     } else {
-        console.log(this.user);
+        
         alert('You\'ve not set your preference');
       }
     }

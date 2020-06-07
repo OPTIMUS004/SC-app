@@ -29,7 +29,6 @@ export class WebSocketService {
   getMessages = () => {
       return Observable.create((observer) => {
         this.socket.on('newMessage', (message) => {
-          console.log(message);
           observer.next(message)
         })
       })

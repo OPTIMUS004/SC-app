@@ -23,10 +23,12 @@
 }
 .chat-box{
     background-color: azure;
+    display: flex;
     padding: 10px;
     width: 80%;
     margin-bottom: 15px;
     border-radius: 5px;
+
 }
 .sender-box{
     bottom: 10px;
