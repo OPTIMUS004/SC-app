@@ -10,7 +10,7 @@ export class AuthService {
 
   currentUser;
   msgBody: object;
-  readonly baseURL = 'https://sc-api-host-test.herokuapp.com/api/';   // http://localhost:3000/api
+  readonly baseURL = 'https://sc-api-host-test.herokuapp.com/api';   // http://localhost:3000/api
   
   constructor(private http: HttpClient, 
               private toastr: ToastrService) { }
