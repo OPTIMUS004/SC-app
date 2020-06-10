@@ -10,7 +10,7 @@ export class AuthService {
 
   currentUser;
   msgBody: object;
-  readonly baseURL = 'https://sc-api-host-test.herokuapp.com/api';   // http://localhost:3000/api
+  readonly baseURL = 'https://sc-api-host-test.herokuapp.com/api';   // http://localhost:3000/api 
   
   constructor(private http: HttpClient, 
               private toastr: ToastrService) { }
@@ -146,7 +146,7 @@ export class AuthService {
     const options = { headers: new HttpHeaders({
       'Content-Type': 'application/json'
   })};
-    return this.http.post(`${this.baseURL}/sendmail/send`, this.msgBody)
+    return this.http.post(`${this.baseURL}/send`, this.msgBody)
     .pipe(
       tap( data => console.log('All: ' +  JSON.stringify(data))),
       catchError(this.handleError)
