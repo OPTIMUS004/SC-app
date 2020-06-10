@@ -146,7 +146,7 @@ export class AuthService {
     const options = { headers: new HttpHeaders({
       'Content-Type': 'application/json'
   })};
-    return this.http.post(`${this.baseURL}/send`, this.msgBody)
+    return this.http.post(`${this.baseURL}/send`, this.msgBody, options)
     .pipe(
       tap( data => console.log('All: ' +  JSON.stringify(data))),
       catchError(this.handleError)
